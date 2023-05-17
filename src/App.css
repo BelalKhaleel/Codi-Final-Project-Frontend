@@ -1,4 +1,20 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary-color: #0D012A;
+  --secondary-color: #FFFCF7;
+  --accent-color: #04A777;
+
+  /* --color: #4b100c; */
+}
