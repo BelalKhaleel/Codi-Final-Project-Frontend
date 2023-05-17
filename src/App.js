@@ -8,15 +8,15 @@ import BookSearchPage from "./pages/Books/BookSearch/BookSearchPage";
 import ContactUsPage from "./pages/ContactUs/ContactUs.js";
 // import Footer from "./components/footer/footer";
 import HomePage from "./pages/Home/Home.js";
-import DashboardPage from "./pages/Dashboard/Dashboard.js";
+// import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import DashboardHome from "./pages/DashboardHome/DashboardHome.js";
 import DashboardUsers from "./pages/DashboardUsers/DashboardUsers";
 import DashboardDonations from "./pages/DashboardDonations/DashboardDonations";
 import DashboardBooks from "./pages/DashboardBooks/DashboardBooks";
 import DashboardUniversities from "./pages/DashboardUniversities/DashboardUniversities";
 // import Header from "./components/header/header";
-import NotFound from "./pages/NotFound/NotFound.js";
-import PrivateRoutes from "./utils/privateRoutes";
+import PageNotFound from "./pages/NotFound/NotFound.js";
+// import PrivateRoutes from "./utils/privateRoutes";
 import Spinner from "./components/spinner/spinner";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
@@ -78,7 +78,7 @@ function App() {
                 <Route path="book-request" element={<BookRequestPage />} />
                 <Route path="book-search" element={<BookSearchPage />} />
                 <Route path="contact" element={<ContactUsPage />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<PageNotFound />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
               </Route>
               {/* <Route path="/" element={<PrivateRoutes />}> */}
@@ -107,7 +107,7 @@ function App() {
               <Route path="book-search" element={<BookSearchPage />} />{" "}
               {/* <Route path="books/show-books" element={<ShowBook />} /> */}
               <Route path="contact" element={<ContactUsPage />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<PageNotFound />} />
               <Route path="unauthorized" element={<Unauthorized />} />
             </Route>
           </Routes>
