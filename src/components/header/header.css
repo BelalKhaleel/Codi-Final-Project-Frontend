@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  color: var(--color);
+  height: 100px;
+}
+
+.logo {
+  width: 80%;
+  height: auto;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  width: 55%;
+  justify-content: space-between;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+}
+
+.nav-list li {
+  margin-right: 25px;
+}
+
+.nav-list li:last-child {
+  margin-right: 0;
+}
+
+.nav-list a {
+  color: var(--color);
+  text-decoration: none;
+  font-size: 20px; 
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-list a:hover {
+  color: var(--accent-color); 
+  text-shadow: 2px 2px 4px var(--accent-color);
+}
+
+.login-button {
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.login-button:hover {
+  background-color: #038662;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:active {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: moveDown 0.2s linear;
+}
+
+.login-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.login-button-container:active .login-button {
+  animation: moveDown 0.2s linear;
+}

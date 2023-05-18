@@ -13,7 +13,7 @@ import DashboardDonations from "./pages/DashboardDonations/DashboardDonations";
 import DashboardBooks from "./pages/DashboardBooks/DashboardBooks";
 import DashboardUniversities from "./pages/DashboardUniversities/DashboardUniversities";
 // import Footer from "./components/footer/footer";
-// import Header from "./components/header/header";
+import Header from "./components/header/header";
 import HomePage from "./pages/Home/Home.js";
 import PageNotFound from "./pages/NotFound/NotFound.js";
 // import PrivateRoutes from "./utils/privateRoutes";
@@ -50,7 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {shouldRenderHeader && <Header />} */}
+      {shouldRenderHeader && <Header />}
       {isLoading ? (
         <div
           style={{
@@ -75,9 +75,9 @@ function App() {
                 <Route path="admin-login" element={<AdminLoginPage />} />
                 <Route path="user-login" element={<UserLoginPage />} />
                 <Route path="home" element={<HomePage />} />
-                <Route path="book-donate" element={<BookDonationPage />} />
-                <Route path="book-request" element={<BookRequestPage />} />
-                <Route path="book-search" element={<BookSearchPage />} />
+                <Route path="donate" element={<BookDonationPage />} />
+                <Route path="request" element={<BookRequestPage />} />
+                <Route path="search" element={<BookSearchPage />} />
                 <Route path="contact" element={<ContactUsPage />} />
                 <Route path="terms" element={<TermsOfServicePage />} />
                 <Route path="*" element={<PageNotFound />} />
