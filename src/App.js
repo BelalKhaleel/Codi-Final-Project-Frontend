@@ -6,18 +6,19 @@ import BookDonationPage from "./pages/Books/BookDonation/BookDonationPage";
 import BookRequestPage from "./pages/Books/BookRequest/BookRequestPage";
 import BookSearchPage from "./pages/Books/BookSearch/BookSearchPage";
 import ContactUsPage from "./pages/ContactUs/ContactUs.js";
-// import Footer from "./components/footer/footer";
-import HomePage from "./pages/Home/Home.js";
 // import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import DashboardHome from "./pages/DashboardHome/DashboardHome.js";
 import DashboardUsers from "./pages/DashboardUsers/DashboardUsers";
 import DashboardDonations from "./pages/DashboardDonations/DashboardDonations";
 import DashboardBooks from "./pages/DashboardBooks/DashboardBooks";
 import DashboardUniversities from "./pages/DashboardUniversities/DashboardUniversities";
+// import Footer from "./components/footer/footer";
 // import Header from "./components/header/header";
+import HomePage from "./pages/Home/Home.js";
 import PageNotFound from "./pages/NotFound/NotFound.js";
 // import PrivateRoutes from "./utils/privateRoutes";
 import Spinner from "./components/spinner/spinner";
+import TermsOfServicePage from "./pages/TermsOfService/TermsOfService";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
 // import UserSignupPage from "./pages/UserSignup/UserSignup.js";
@@ -78,6 +79,7 @@ function App() {
                 <Route path="book-request" element={<BookRequestPage />} />
                 <Route path="book-search" element={<BookSearchPage />} />
                 <Route path="contact" element={<ContactUsPage />} />
+                <Route path="terms" element={<TermsOfServicePage />} />
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
               </Route>
@@ -107,6 +109,7 @@ function App() {
               <Route path="book-search" element={<BookSearchPage />} />{" "}
               {/* <Route path="books/show-books" element={<ShowBook />} /> */}
               <Route path="contact" element={<ContactUsPage />} />
+              <Route path="terms" element={<TermsOfServicePage />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="unauthorized" element={<Unauthorized />} />
             </Route>

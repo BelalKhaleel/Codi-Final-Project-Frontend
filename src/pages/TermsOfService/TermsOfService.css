@@ -1,0 +1,38 @@
+.terms-of-service-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.section-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.section-list li {
+  margin-bottom: 10px;
+}
+
+.section-list p {
+  margin-bottom: 10px;
+}
+
+.section-content {
+  margin-bottom: 5px;
+}
