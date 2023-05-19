@@ -1,10 +1,3 @@
-.footer-container {
-  display: flex;
-  position: fixed;
-  bottom: 0.5rem;
-  width: 100%;
-}
-
 .footer {
   background-color: var(--secondary-color);
   color: var(--color);
@@ -14,7 +7,15 @@
   align-items: flex-start;
   padding: 0rem 1rem;
   width: 100%;
+  margin-top: 50px;
   /* height: 40vh; */
+}
+
+.footer-container {
+  position: relative;
+  display: flex;
+  bottom: 0.5rem;
+  width: 100%;
 }
 
 .footer-main {
@@ -44,6 +45,7 @@
   width: 250px;
   margin-top: -59px;
   margin-bottom: -30px;
+  transform: rotate(-90deg);
 }
 
 .logo-text {
@@ -80,6 +82,8 @@
 
 .footer-link:hover {
   color: var(--accent-color);
+  transform: translateX(4px);
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .footer-books {
@@ -107,6 +111,19 @@
   text-align: center;
   width: 100%;
   color: var(--color);
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  animation: slideIn 0.5s ease-in-out;
 }
 
 @media (max-width: 992px) {

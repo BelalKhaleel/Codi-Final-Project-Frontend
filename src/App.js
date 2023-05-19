@@ -66,7 +66,7 @@ function App() {
       ) : (
         <div
           className="pages"
-          style={shouldRenderHeader ? { marginTop: "85px" } : { marginTop: 0 }}
+          style={shouldRenderHeader ? { marginTop: "5px" } : { marginTop: 0 }}
         >
           <Routes>
             <Route>

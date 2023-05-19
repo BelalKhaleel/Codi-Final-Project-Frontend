@@ -3,9 +3,14 @@ import "./button.css";
 
 function MainButton(props) {
   const buttonStyle = {
-    color: props.textColor, // Set the desired text color here
-    fontWeight: props.fontWeight, // Set the desired font weight here
-    ...props.style // Merge with other style properties passed as props
+    color: props.textColor,
+    fontWeight: props.fontWeight,
+    ...props.style
+  };
+
+  const hoverStyle = {
+    color: props.hoverColor,
+    ...props.hoverStyle
   };
 
   return (
@@ -16,10 +21,9 @@ function MainButton(props) {
       onClick={props.onClick}
       disabled={props.disabled}
     >
-      {props.name}
+      <span style={hoverStyle}>{props.name}</span>
     </button>
   );
 }
 
 export default MainButton;
-

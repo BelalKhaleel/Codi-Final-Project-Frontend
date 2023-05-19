@@ -77,11 +77,18 @@
   animation: header-moveDown 0.2s linear;
 }
 
-@keyframes header-moveDown {
+@keyframes header-fadeIn {
   0% {
-    transform: translateY(0);
+    opacity: 0;
+    transform: translateX(100%);
   }
   100% {
-    transform: translateY(4px);
+    opacity: 1;
+    transform: translateX(0);
   }
+}
+
+.header {
+  opacity: 0;
+  animation: header-fadeIn 2s ease-in-out forwards;
 }
