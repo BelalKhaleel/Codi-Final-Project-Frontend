@@ -38,6 +38,7 @@
 .homepage-backgroundimage-button:hover {
   color: var(--secondary-color);
   background-color: var(--color);
+  opacity: 0.9;
 }
 
 .homepage-about-section {
@@ -58,4 +59,60 @@
   line-height: 1.5;
   color: var(--color);
   margin-bottom: 15px;
+}
+
+.read-more-button {
+  color: var(--secondary-color);
+  background-color: var(--color);
+  
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.read-more-button:hover {
+  color: var(--color);
+  background-color: var(--secondary-color);
+}
+
+.homepage-quote-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+
+.homepage-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s;
+  cursor: pointer;
+  margin-right: 70px;
+}
+
+.homepage-quote:last-child {
+  margin-right: 0;
+}
+
+.homepage-quote:hover {
+  transform: scale(1.1);
+}
+
+.homepage-quote-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.homepage-quote-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-style: italic;
+  color: #555;
 }

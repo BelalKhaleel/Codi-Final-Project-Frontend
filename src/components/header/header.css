@@ -46,6 +46,11 @@
   text-shadow: 2px 2px 4px var(--accent-color);
 }
 
+.header-nav-list a.active {
+  border-bottom: 2px solid var(--color2); /* Adjust the color and thickness as needed */
+  padding-bottom: 4px;
+}
+
 .header-login-button {
   background-color: var(--accent-color);
   color: var(--secondary-color);

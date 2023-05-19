@@ -1,0 +1,39 @@
+.testimonial-section {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.testimonial-item {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  color: var(--primary-color);
+}
+
+.testimonial-name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.testimonial-description {
+  font-size: 14px;
+  color: var(--secondary-color);
+}
+
+/* Target the carousel arrows */
+.testimonial-carousel .carousel .control-arrow {
+color: var(--color2);
+background-color: var(--color2);
+}
+
+/* Target the left arrow specifically
+.custom-carousel .carousel .control-arrow.control-prev {
+  /* Add your styles here */
+/* } */
+
+/* Target the right arrow specifically */
+/* .custom-carousel .carousel .control-arrow.control-next { */
+  /* Add your styles here 
+} */
