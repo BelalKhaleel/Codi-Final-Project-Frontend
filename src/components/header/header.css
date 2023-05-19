@@ -8,32 +8,32 @@
   height: 100px;
 }
 
-.logo {
+.header-logo {
   width: 80%;
   height: auto;
 }
 
-.nav-container {
+.header-nav-container {
   display: flex;
   align-items: center;
   width: 55%;
   justify-content: space-between;
 }
 
-.nav-list {
+.header-nav-list {
   display: flex;
   list-style: none;
 }
 
-.nav-list li {
+.header-nav-list li {
   margin-right: 25px;
 }
 
-.nav-list li:last-child {
+.header-nav-list li:last-child {
   margin-right: 0;
 }
 
-.nav-list a {
+.header-nav-list a {
   color: var(--color);
   text-decoration: none;
   font-size: 20px; 
@@ -41,12 +41,12 @@
   position: relative;
 }
 
-.nav-list a:hover {
+.header-nav-list a:hover {
   color: var(--accent-color); 
   text-shadow: 2px 2px 4px var(--accent-color);
 }
 
-.login-button {
+.header-login-button {
   background-color: var(--accent-color);
   color: var(--secondary-color);
   padding: 8px 16px;
@@ -58,21 +58,30 @@
   position: relative;
 }
 
-.login-button:hover {
+.header-login-button:hover {
   background-color: #038662;
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-.login-button:active {
+.header-login-button:active {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  animation: moveDown 0.2s linear;
+  animation: header-moveDown 0.2s linear;
 }
 
-.login-button-container {
+.header-login-button-container {
   position: relative;
   display: inline-block;
 }
 
-.login-button-container:active .login-button {
-  animation: moveDown 0.2s linear;
+.header-login-button-container:active .header-login-button {
+  animation: header-moveDown 0.2s linear;
+}
+
+@keyframes header-moveDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
 }

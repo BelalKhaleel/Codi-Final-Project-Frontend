@@ -12,7 +12,7 @@ import DashboardUsers from "./pages/DashboardUsers/DashboardUsers";
 import DashboardDonations from "./pages/DashboardDonations/DashboardDonations";
 import DashboardBooks from "./pages/DashboardBooks/DashboardBooks";
 import DashboardUniversities from "./pages/DashboardUniversities/DashboardUniversities";
-// import Footer from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import HomePage from "./pages/Home/Home.js";
 import PageNotFound from "./pages/NotFound/NotFound.js";
@@ -116,7 +116,7 @@ function App() {
           </Routes>
         </div>
       )}
-      {/* {shouldRenderHeader && <Footer />} */}
+      {shouldRenderHeader && <Footer />}
     </div>
   );
 }
