@@ -4,7 +4,7 @@ import "./Home.css";
 import BackgroundImage from "../../assets/images/book-donation.webp";
 import QuoteImage1 from "../../assets/images/bono.jpg";
 import QuoteImage2 from "../../assets/images/Helen-Keller.png";
-import QuoteImage3 from "../../assets/images/Kathy-Calvin.png";
+import QuoteImage3 from "../../assets/images/maya-angelou.jpg";
 import Testimonials from "../../components/testimonial/testimonial";
 
 function HomePage() {

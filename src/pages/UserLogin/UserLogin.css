@@ -8,21 +8,21 @@
   z-index: 1;
 }
 
-.user-login-background-effect-left {
+/* .user-login-background-effect-left {
   position: absolute;
   top: 0;
   left: 6%;
   z-index: -1;
   width: 400px;
   height: 100vh;
-  background-image: url("../../images/RMZNA-user-login-page.png.png");
-}
+  background-image: url("../../assets/images/Bookmark-Background-PNG.png");
+} */
 
 .user-login-page-container {
   width: 75%;
   height: 650px;
-  /* background-color: var(--primary-color); */
-  background-color: #fef1ce;
+  background-color: var(--secondary-color);
+  /* background-color: #fef1ce; */
 
   border-radius: 20px;
   box-shadow: 0 4px 15px #888;
@@ -32,10 +32,11 @@
 
 .user-login-page-image {
   width: 55%;
-  background: url("../../images/RMZNA-user-login-page-2.png");
+  background: url("../../assets/images/Bookup\ branding-34.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: var(--color);
 }
 
 .user-login-page-form {
@@ -43,22 +44,24 @@
   display: flex;
   flex-direction: column;
   padding: 20px 80px;
+  margin-top: 30px;
 }
 
 .user-login-page-title {
   font-size: 2.5rem;
   margin-bottom: 60px;
-  color: var(--accent-color);
+  /* margin-top: 70px; */
+  color: var(--color2);
 }
 
-.user-login-page-inputs {
+.user-login-page-input {
   display: flex;
   flex-direction: column;
   gap: 30px;
   width: 100%;
 }
 
-.user-login-page-inputs input {
+.user-login-page-input input {
   width: 100%;
 }
 
@@ -78,7 +81,7 @@
   overflow: hidden;
 }
 
-.user-login-page-buttons {
+.user-login-page-button {
   display: flex;
   align-items: center;
 }
