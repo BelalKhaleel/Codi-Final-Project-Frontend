@@ -127,16 +127,21 @@ const UserLoginPage = () => {
 
       if (response.status === 200) {
         const oneWeek = 7 * 24 * 60 * 60 * 1000;
+        // Check if the user is an admin
+        if (response.data.isAdmin === true) {
+          Cookies.set("admin-token", response.data.token, {
+            expires: oneWeek,
+          });
         Cookies.set("user-token", response.data.token, {
           expires: oneWeek,
         });
-
+      }
         
         Cookies.set("user-id", response.data.id);
       } else {
         console.error(response.data.message);
       }
-      
+
       setIsAdmin(response.data.isAdmin); // Set isAdmin state based on the response
 
       handleButtonClick();
