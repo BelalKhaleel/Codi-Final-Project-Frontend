@@ -1,4 +1,4 @@
-/* .admin-count-card {
+.admin-count-card {
   width: 300px;
   background-color: var(--accent-color);
   height: 150px;
@@ -17,9 +17,9 @@
   border-color: var(--accent-color);
 }
 
-.admin-count-card:hover p::after {
+/* .admin-count-card:hover p::after {
   background-image: url("../../images/RMZNA-text-bg.png");
-}
+} */
 
 .admin-count-card p::after {
   content: attr(data-admins-count);
@@ -28,9 +28,9 @@
   right: 0;
   font-size: 10rem;
   /* color: var(--secondary-color); */
-  /* font-weight: 600;
-  background: url("../../images/RMZNA-user-login-page.png.png");
+  font-weight: 600;
+  /* background: url("../../images/RMZNA-user-login-page.png.png"); */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: 0.5s;
-} */ 
+}

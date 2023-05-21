@@ -1,12 +1,12 @@
-import React from "react";
+// import React from "react";
 
-const AdminLoginPage = () => {
-  return (
-    <h1>AdminLogin</h1>
-  )
-}
+// const AdminLoginPage = () => {
+//   return (
+//     <h1>AdminLogin</h1>
+//   )
+// }
 
-export default AdminLoginPage;
+// export default AdminLoginPage;
 // import React, { useState } from "react";
 // import "./AdminLogin.css";
 // import TextField from "../../components/text-field/text-field";

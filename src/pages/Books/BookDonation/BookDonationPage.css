@@ -1,0 +1,88 @@
+.donation-page-form-container {
+  width: 40%;
+  margin: 50px auto;
+}
+
+.book-donation-page-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.book-donation-page-fieldset .book-donation-page-form {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.book-donation-page-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}.book-donation-page-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.book-donation-page-fieldset {
+  /* border: none; */
+  padding: 30px;
+  margin: 0;
+}
+
+.book-donation-page-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.book-donation-page-form input,
+.book-donation-page-form select,
+.book-donation-page-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--color);
+  border-radius: 4px;
+}
+
+.book-donation-page-form textarea {
+  resize: vertical;
+}
+
+.book-donation-page-form button:hover {
+  background-color: var(--accent-color);
+}
+
+
+.book-donation-page-form input,
+.book-donation-page-form select,
+.book-donation-page-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--color);
+  border-radius: 4px;
+}
+
+.book-donation-page-form input[type="file"] {
+  border: none;
+}
+
+.book-donation-page-form textarea {
+  resize: vertical;
+}
+
+.book-donation-page-form button {
+  margin-top: 10px;
+  font-size: 18px;
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.book-donation-page-form button:hover {
+  background-color: var(--accent-color);
+}

@@ -1,5 +1,5 @@
-/* .dashboard-hero-section {
-  background-image: url("../../images/RMZNA-user-login-page.png.png");
+.dashboard-hero-section {
+  /* background-image: url("../../assets/images/Bookup branding-31.svg"); */
   background-size: contain;
   height: 282px;
   margin-bottom: 40px;
@@ -20,4 +20,4 @@
   .dashboard-hero-section h2 {
     font-size: 3rem;
   }
-} */
+}

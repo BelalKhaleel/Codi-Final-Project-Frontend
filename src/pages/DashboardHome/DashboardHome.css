@@ -1,4 +1,4 @@
-/* .dashboard-home {
+.dashboard-home {
   display: flex;
   flex-direction: column;
   gap: 100px;
@@ -40,4 +40,4 @@
     margin-top: 40px;
     height: 500px;
   }
-} */
+}

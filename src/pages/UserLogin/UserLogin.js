@@ -6,11 +6,17 @@ import "./UserLogin.css";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
 import Cookies from "js-cookie";
+
 const UserLoginPage = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate(-1);
+    if (isAdmin) {
+      navigate("/dashboard"); // Redirect to admin dashboard
+    } else {
+      navigate(-1); // Navigate back to the previous page for non-admin users
+    }
   };
+  
 
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
@@ -32,6 +38,7 @@ const UserLoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const emptySignupTextFields = () => {
     setUserSignup({
@@ -123,10 +130,15 @@ const UserLoginPage = () => {
         Cookies.set("user-token", response.data.token, {
           expires: oneWeek,
         });
+
+        
         Cookies.set("user-id", response.data.id);
       } else {
         console.error(response.data.message);
       }
+      
+      setIsAdmin(response.data.isAdmin); // Set isAdmin state based on the response
+
       handleButtonClick();
     } catch (e) {
       console.log(e.message);

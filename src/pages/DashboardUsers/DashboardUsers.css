@@ -1,4 +1,4 @@
-/* .dashboard-admins {
+.dashboard-users {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -6,7 +6,7 @@
   padding: 0 40px;
 }
 
-.dashboard-admins-form {
+.dashboard-users-form {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
@@ -14,18 +14,18 @@
   transition: 0.5s;
 }
 
-.dashboard-admins-form form {
+.dashboard-users-form form {
   width: 50%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.dashboard-admin-count {
+.dashboard-user-count {
   height: 50%;
 }
 
-.dashboard-admin-data-grid {
+.dashboard-user-data-grid {
   flex-grow: 1;
 }
 
@@ -34,23 +34,23 @@
   color: var(--secondary-color);
 }
 
-.dashboard-admins-heading {
+.dashboard-users-heading {
   margin-bottom: 40px;
 }
 
-.dashboard-admins-heading h2 {
+.dashboard-users-heading h2 {
   font-size: 3rem;
   color: var(--accent-color);
 }
 
-.dashboard-admin-add-button {
+.dashboard-user-add-button {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
 }
 
-.dashboard-admin-select {
+.dashboard-user-select {
   border: 1px solid #444;
   outline: none;
   border-radius: 4px;
@@ -63,19 +63,19 @@
 }
 
 @media (max-width: 1200px) {
-  .dashboard-admins {
+  .dashboard-users {
     padding: 0 20px;
   }
 
-  /* .dashboard-admins-form form {
+  /* .dashboard-users-form form {
     margin-bottom: 40px;
   }
 
-  .dashboard-admin-shapes {
+  .dashboard-user-shapes {
     display: none;
   }
 
-  .dashboard-admins-form form {
+  .dashboard-users-form form {
     width: 100%;
   } */
-/* }  */
+} 

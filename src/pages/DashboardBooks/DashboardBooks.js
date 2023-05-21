@@ -20,25 +20,25 @@ export default DashboardBooks;
 // import Swal from "sweetalert2";
 // import DashboardHeroSection from "../../components/DashboardHeroSection/DashboardHeroSection";
 // import DashboardPopUp from "../../components/DashboardPopUp/DashboardPopUp";
-// import "./DashboardProducts.css";
+// import "./DashboardBooks.css";
 // import Spinner from "../../components/spinner/spinner";
 
-// function DashboardProducts() {
+// function DashboardBooks() {
 //   const [data, setData] = useState([]);
 //   const [totalItems, setTotalItems] = useState(0);
 //   const [page, setPage] = useState(0);
 //   const [perPage, setPerPage] = useState(25);
 //   const [isLoading, setIsLoading] = useState(false);
-//   const [productAddData, setProductAddData] = useState({
-//     name: "",
+//   const [bookAddData, setBookAddData] = useState({
+//     title: "",
 //     description: "",
 //     image: null,
 //     price: "",
 //     category: [],
 //   });
 
-//   const [productEditData, setProductEditData] = useState({
-//     name: "",
+//   const [bookEditData, setBookEditData] = useState({
+//     title: "",
 //     description: "",
 //     image: null,
 //     price: "",
@@ -76,7 +76,7 @@ export default DashboardBooks;
 //         >
 //           <img
 //             src={`${process.env.REACT_APP_API_URL}/${params.value}`}
-//             alt="Product"
+//             alt="Book"
 //             width="100%"
 //             height="100%"
 //             style={{ borderRadius: "5px", objectFit: "contain" }}
@@ -84,7 +84,7 @@ export default DashboardBooks;
 //         </div>
 //       ),
 //     },
-//     { field: "name", headerName: "Name", width: 200 },
+//     { field: "title", headerName: "Title", width: 200 },
 //     { field: "description", headerName: "Description", width: 300 },
 //     { field: "price", headerName: "Price", width: 60 },
 //     {
@@ -105,7 +105,7 @@ export default DashboardBooks;
 //           <IconButton
 //             color="secondary"
 //             aria-label="delete"
-//             onClick={() => deleteProduct(params.id)}
+//             onClick={() => deleteBook(params.id)}
 //           >
 //             <DeleteIcon style={{ color: "var(--accent-color)" }} />
 //           </IconButton>
@@ -125,11 +125,11 @@ export default DashboardBooks;
 //     },
 //   ];
 
-//   const getProducts = async () => {
+//   const getBooks = async () => {
 //     setIsLoading(true);
 //     try {
 //       const response = await axios.get(
-//         `${process.env.REACT_APP_API_URL}/api/product?limit=${25}`
+//         `${process.env.REACT_APP_API_URL}/api/book?limit=${25}`
 //       );
 //       console.log(response);
 //       setData(response.data.items);
@@ -142,44 +142,44 @@ export default DashboardBooks;
 //   };
 
 //   useEffect(() => {
-//     getProducts();
+//     getBooks();
 //     getCategories();
 //   }, []);
 
 //   const handleFormChange = (event) => {
 //     const value = event.target.value;
-//     setProductAddData({ ...productAddData, [event.target.name]: value });
-//     console.log(productAddData);
+//     setBookAddData({ ...bookAddData, [event.target.name]: value });
+//     console.log(bookAddData);
 //   };
 
 //   const handleEditChange = (event) => {
 //     const value = event.target.value;
-//     setProductEditData({ ...productEditData, [event.target.name]: value });
+//     setBookEditData({ ...bookEditData, [event.target.name]: value });
 //   };
 
 //   const handleAddImageChange = (e) => {
-//     setProductAddData({ ...productAddData, image: e.target.files[0] });
+//     setBookAddData({ ...bookAddData, image: e.target.files[0] });
 //   };
 
 //   const handleEditImageChange = (e) => {
-//     setProductEditData({ ...productEditData, image: e.target.files[0] });
+//     setBookEditData({ ...bookEditData, image: e.target.files[0] });
 //   };
 
-//   const addProduct = async (e) => {
+//   const addBook = async (e) => {
 //     e.preventDefault();
 
 //     setIsSubmitting(true);
-//     const productAddForm = new FormData();
-//     productAddForm.append("name", productAddData.name);
-//     productAddForm.append("description", productAddData.description);
-//     productAddForm.append("price", productAddData.price);
-//     productAddForm.append("image", productAddData.image);
-//     productAddForm.append("category", productAddData.category._id);
+//     const bookAddForm = new FormData();
+//     bookAddForm.append("title", bookAddData.title);
+//     bookAddForm.append("description", bookAddData.description);
+//     bookAddForm.append("price", bookAddData.price);
+//     bookAddForm.append("image", bookAddData.image);
+//     bookAddForm.append("category", bookAddData.category._id);
 
 //     try {
 //       const response = await axios.post(
-//         `${process.env.REACT_APP_API_URL}/api/product`,
-//         productAddForm,
+//         `${process.env.REACT_APP_API_URL}/api/book`,
+//         bookAddForm,
 //         {
 //           headers: {
 //             "Content-Type": "multipart/form-data",
@@ -192,17 +192,17 @@ export default DashboardBooks;
 //       Swal.fire({
 //         position: "top-end",
 //         icon: "success",
-//         title: "Product Added Successfully",
+//         title: "Book Added Successfully",
 //         showConfirmButton: false,
 //         timer: 1500,
 //       });
-//       setProductAddData({
+//       setBookAddData({
 //         fullName: "",
 //         email: "",
 //         password: "",
 //       });
 //       setError(response.data.message);
-//       getProducts();
+//       getBooks();
 //       getCategories();
 //     } catch (e) {
 //       console.log(e);
@@ -211,21 +211,21 @@ export default DashboardBooks;
 //     }
 //   };
 
-//   const editProduct = async (e) => {
+//   const editBook = async (e) => {
 //     e.preventDefault();
 
 //     setIsSubmitting(true);
-//     const productEditForm = new FormData();
-//     productEditForm.append("name", productEditData.name);
-//     productEditForm.append("description", productEditData.description);
-//     productEditForm.append("price", productEditData.price);
-//     productEditForm.append("image", productEditData.image);
-//     productEditForm.append("category", productEditData.category._id);
+//     const bookEditForm = new FormData();
+//     bookEditForm.append("title", bookEditData.title);
+//     bookEditForm.append("description", bookEditData.description);
+//     bookEditForm.append("price", bookEditData.price);
+//     bookEditForm.append("image", bookEditData.image);
+//     bookEditForm.append("category", bookEditData.category._id);
 
 //     try {
 //       const response = await axios.put(
-//         `${process.env.REACT_APP_API_URL}/api/product/${editId}`,
-//         productEditForm,
+//         `${process.env.REACT_APP_API_URL}/api/book/${editId}`,
+//         bookEditForm,
 //         {
 //           headers: {
 //             "Content-Type": "multipart/form-data",
@@ -238,17 +238,17 @@ export default DashboardBooks;
 //       Swal.fire({
 //         position: "top-end",
 //         icon: "success",
-//         title: "Product Updated Successfully",
+//         title: "Book Updated Successfully",
 //         showConfirmButton: false,
 //         timer: 1500,
 //       });
-//       setProductEditData({
+//       setBookEditData({
 //         fullName: "",
 //         email: "",
 //         password: "",
 //       });
 //       setError(response.data.message);
-//       getProducts();
+//       getBooks();
 //       getCategories();
 //     } catch (e) {
 //       console.log(e);
@@ -257,7 +257,7 @@ export default DashboardBooks;
 //     }
 //   };
 
-//   const deleteProduct = async (id) => {
+//   const deleteBook = async (id) => {
 //     Swal.fire({
 //       title: "Are you sure?",
 //       text: "You won't be able to revert this!",
@@ -270,16 +270,16 @@ export default DashboardBooks;
 //       if (result.isConfirmed) {
 //         try {
 //           await axios
-//             .delete(`${process.env.REACT_APP_API_URL}/api/product/${id}`)
+//             .delete(`${process.env.REACT_APP_API_URL}/api/book/${id}`)
 //             .then((response) => {
 //               console.log(response.data);
-//               getProducts();
+//               getBooks();
 //               getCategories();
 //             });
 //         } catch (error) {
 //           console.log(error);
 //         }
-//         Swal.fire("Deleted!", "Your product has been deleted.", "success");
+//         Swal.fire("Deleted!", "Your book has been deleted.", "success");
 //       }
 //     });
 //   };
@@ -307,10 +307,10 @@ export default DashboardBooks;
 
 //   return (
 //     <div className="dashboard-admins onLoad">
-//       <DashboardHeroSection title="Products" />
+//       <DashboardHeroSection title="Books" />
 //       {openPopup && (
 //         <DashboardPopUp
-//           title={isEdit ? "Edit Product" : "Add Product"}
+//           title={isEdit ? "Edit Book" : "Add Book"}
 //           onClick={
 //             isEdit
 //               ? () => {
@@ -321,18 +321,18 @@ export default DashboardBooks;
 //                   setOpenPopup(false);
 //                 }
 //           }
-//           onSubmit={isEdit ? editProduct : addProduct}
+//           onSubmit={isEdit ? editBook : addBook}
 //         >
 //           <div style={{ color: "var(--accent-color)" }}>{error}</div>
 //           <div>
 //             <TextField
-//               label="Name"
+//               label="Title"
 //               type="text"
 //               style={{ width: "100%", fontSize: "1rem" }}
-//               name="name"
+//               name="title"
 //               autoFocus={isEdit ? true : false}
 //               onChange={isEdit ? handleEditChange : handleFormChange}
-//               value={isEdit ? productEditData.name : productAddData.name}
+//               value={isEdit ? bookEditData.title : bookAddData.title}
 //             />
 //           </div>
 //           <div>
@@ -344,8 +344,8 @@ export default DashboardBooks;
 //               onChange={isEdit ? handleEditChange : handleFormChange}
 //               value={
 //                 isEdit
-//                   ? productEditData.description
-//                   : productAddData.description
+//                   ? bookEditData.description
+//                   : bookAddData.description
 //               }
 //             />
 //           </div>
@@ -356,7 +356,7 @@ export default DashboardBooks;
 //               style={{ width: "100%", fontSize: "1rem" }}
 //               name="price"
 //               onChange={isEdit ? handleEditChange : handleFormChange}
-//               value={isEdit ? productEditData.price : productAddData.price}
+//               value={isEdit ? bookEditData.price : bookAddData.price}
 //             />
 //           </div>
 //           <div>
@@ -367,19 +367,19 @@ export default DashboardBooks;
 //                 name="category"
 //                 value={
 //                   isEdit
-//                     ? productEditData.category.name
-//                     : productAddData.category.name
+//                     ? bookEditData.category.name
+//                     : bookAddData.category.name
 //                 } // or formData.category.name
 //                 onChange={
 //                   isEdit
 //                     ? (e) =>
-//                         setProductEditData({
-//                           ...productEditData,
+//                         setBookEditData({
+//                           ...bookEditData,
 //                           category: { _id: e.target.value },
 //                         })
 //                     : (e) =>
-//                         setProductAddData({
-//                           ...productAddData,
+//                         setBookAddData({
+//                           ...bookAddData,
 //                           category: { _id: e.target.value },
 //                         })
 //                 }
@@ -398,7 +398,7 @@ export default DashboardBooks;
 //               name="image"
 //               id="file-input"
 //               onChange={isEdit ? handleEditImageChange : handleAddImageChange}
-//               // value={isEdit ? productEditData.image : productAddData.image}
+//               // value={isEdit ? bookEditData.image : bookAddData.image}
 //               className="file-input__input"
 //             />
 //             <label className="file-input__label" htmlFor="file-input">
@@ -446,7 +446,7 @@ export default DashboardBooks;
 //       >
 //         <div className="dashboard-admin-add-button">
 //           <MainButton
-//             name="Add Product"
+//             name="Add Book"
 //             style={{ padding: "1rem 2rem" }}
 //             onClick={async () => {
 //               await getCategories();
@@ -472,4 +472,4 @@ export default DashboardBooks;
 //   );
 // }
 
-// export default DashboardProducts;
+// export default DashboardBooks;

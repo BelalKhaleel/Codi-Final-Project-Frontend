@@ -1,12 +1,12 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
+// import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
 import BookDonationPage from "./pages/Books/BookDonation/BookDonationPage";
 import BookRequestPage from "./pages/Books/BookRequest/BookRequestPage";
 import BookSearchPage from "./pages/Books/BookSearch/BookSearchPage";
 import ContactUsPage from "./pages/ContactUs/ContactUs.js";
-// import DashboardPage from "./pages/Dashboard/Dashboard.js";
+import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import DashboardHome from "./pages/DashboardHome/DashboardHome.js";
 import DashboardUsers from "./pages/DashboardUsers/DashboardUsers";
 import DashboardDonations from "./pages/DashboardDonations/DashboardDonations";
@@ -72,7 +72,7 @@ function App() {
             <Route>
               <Route>
                 <Route exact path="/" element={<HomePage />} />
-                <Route path="admin-login" element={<AdminLoginPage />} />
+                {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
                 <Route path="user-login" element={<UserLoginPage />} />
                 <Route path="home" element={<HomePage />} />
                 <Route path="donate" element={<BookDonationPage />} />
@@ -84,7 +84,7 @@ function App() {
                 <Route path="unauthorized" element={<Unauthorized />} />
               </Route>
               {/* <Route path="/" element={<PrivateRoutes />}> */}
-                {/* <Route path="/" element={<DashboardPage />}> */}
+                <Route path="/" element={<DashboardPage />}>
                   <Route path="/dashboard" element={<DashboardHome />} />
                   <Route path="/dashboard-users" element={<DashboardUsers />} />
                   <Route
@@ -96,11 +96,11 @@ function App() {
                     path="/dashboard-universities"
                     element={<DashboardUniversities />}
                   />
-                {/* </Route> */}
+                </Route>
               {/* </Route> */}
               {/* <Route exact path="/show-book" element={<HomePage />} /> */}
               <Route exact path="/" element={<HomePage />} />
-              <Route path="admin-login" element={<AdminLoginPage />} />
+              {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
               <Route path="user-login" element={<UserLoginPage />} />
               {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
               <Route path="home-page" element={<HomePage />} />
