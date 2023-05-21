@@ -30,7 +30,7 @@ function App() {
   const isDashboardPath = location.pathname.startsWith("/dashboard");
   const isNotFoundPath = location.pathname === "*";
   const isUnauthorizedPath = location.pathname === "/unauthorized";
-  const isAdminLoginPath = location.pathname === "/admin-login";
+  // const isAdminLoginPath = location.pathname === "/admin-login";
   const isUserLoginPath = location.pathname === "/user-login";
 
   // Don't render the header in Dashboard, Unauthorized, and NotFound pages
@@ -38,7 +38,7 @@ function App() {
     !isDashboardPath &&
     !isNotFoundPath &&
     !isUnauthorizedPath &&
-    !isAdminLoginPath &&
+    // !isAdminLoginPath &&
     !isUserLoginPath;
 
   useEffect(() => {
@@ -99,19 +99,19 @@ function App() {
                 </Route>
               {/* </Route> */}
               {/* <Route exact path="/show-book" element={<HomePage />} /> */}
-              <Route exact path="/" element={<HomePage />} />
+              {/* <Route exact path="/" element={<HomePage />} /> */}
               {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
-              <Route path="user-login" element={<UserLoginPage />} />
+              {/* <Route path="user-login" element={<UserLoginPage />} /> */}
               {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
-              <Route path="home-page" element={<HomePage />} />
-              <Route path="book-donate" element={<BookDonationPage />} />
-              <Route path="book-request" element={<BookRequestPage />} />
-              <Route path="book-search" element={<BookSearchPage />} />{" "}
+              {/* <Route path="home-page" element={<HomePage />} /> */}
+              {/* <Route path="book-donate" element={<BookDonationPage />} /> */}
+              {/* <Route path="book-request" element={<BookRequestPage />} /> */}
+              {/* <Route path="book-search" element={<BookSearchPage />} />{" "} */}
               {/* <Route path="books/show-books" element={<ShowBook />} /> */}
-              <Route path="contact" element={<ContactUsPage />} />
-              <Route path="terms" element={<TermsOfServicePage />} />
-              <Route path="*" element={<PageNotFound />} />
-              <Route path="unauthorized" element={<Unauthorized />} />
+              {/* <Route path="contact" element={<ContactUsPage />} /> */}
+              {/* <Route path="terms" element={<TermsOfServicePage />} /> */}
+              {/* <Route path="*" element={<PageNotFound />} /> */}
+              {/* <Route path="unauthorized" element={<Unauthorized />} /> */}
             </Route>
           </Routes>
         </div>
