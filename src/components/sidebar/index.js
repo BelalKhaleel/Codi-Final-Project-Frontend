@@ -29,7 +29,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar close">
+    <div className="sidebar">
       <div className="sidebar-admin-profile spacing">
         <p>
           <AccountRoundedIcon />

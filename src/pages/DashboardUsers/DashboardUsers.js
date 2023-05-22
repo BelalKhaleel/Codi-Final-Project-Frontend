@@ -1,14 +1,3 @@
-// import React from "react";
-
-// const DashboardUsers = () => {
-//   return (
-//     <div>
-//       <h1>dashboard users</h1>
-//     </div>
-//   )
-// }
-
-// export default DashboardUsers;
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
@@ -54,7 +43,7 @@ function DashboardUsers() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 420 },
+    // { field: "_id", headerName: "ID", width: 420 },
     { field: "fullName", headerName: "Full name", width: 260 },
     { field: "email", headerName: "Email", width: 400 },
     {
@@ -93,7 +82,8 @@ function DashboardUsers() {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/user?page=${page}&limit=${perPage}`
       );
-      setData(response.data.items);
+      console.log(response)
+      setData(response.data.users);
       setTotalItems(response.data.totalItems);
       setIsLoading(false);
     } catch (e) {
@@ -123,6 +113,7 @@ function DashboardUsers() {
       full_name: userAddData.fullName,
       email: userAddData.email,
       password: userAddData.password,
+      isAdmin: userAddData.isAdmin
     };
     try {
       const response = await axios.post(
@@ -143,6 +134,7 @@ function DashboardUsers() {
         fullName: "",
         email: "",
         password: "",
+        isAdmin: false,
       });
       setError(response.data.message);
       getUsers();
@@ -273,6 +265,14 @@ function DashboardUsers() {
               value={isEdit ? userEditData.password : userAddData.password}
             />
           </div>
+          <TextField
+          label="Is Admin"
+          type="radio"
+          style={{ width: "100%", fontSize: "1rem" }}
+          name="isAdmin"
+          onChange={isEdit? handleEditChange : handleFormChange}
+          value={true}
+          />
           <div>
             <MainButton
               name={isEdit ? "Edit" : "Add"}

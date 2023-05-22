@@ -164,25 +164,25 @@ function DashboardHome() {
         <DashboardCard
           title="Users"
           dataCount={countUsers}
-          style={{ flexGrow: 1 }}
+          // style={{ flexGrow: 1 }}
         />
         <DashboardCard
           title="Books"
           dataCount={countBooks}
           onClick={() => navigate("/dashboard-books")}
-          style={{ flexGrow: 1 }}
+          // style={{ flexGrow: 1 }}
         />
         <DashboardCard
           title="Donations"
           dataCount={countDonations}
           onClick={() => navigate("/dashboard-donations")}
-          style={{ flexGrow: 1 }}
+          // style={{ flexGrow: 1 }}
         />
         <DashboardCard
           title="Universities"
           dataCount={countUniversities}
           onClick={() => navigate("/dashboard-universities")}
-          style={{ flexGrow: 1 }}
+          // style={{ flexGrow: 1 }}
         />
       </div>
       <div className="dashboard-home-charts">

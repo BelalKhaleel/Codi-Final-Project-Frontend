@@ -6,6 +6,7 @@ import QuoteImage1 from "../../assets/images/bono.jpg";
 import QuoteImage2 from "../../assets/images/Helen-Keller.png";
 import QuoteImage3 from "../../assets/images/maya-angelou.jpg";
 import Testimonials from "../../components/testimonial/testimonial";
+import HomeTestimonialSection from "../../components/swiper/swiper";
 
 function HomePage() {
   const [showAdditionalText, setShowAdditionalText] = useState(false);
@@ -98,7 +99,7 @@ function HomePage() {
             </p>
           </div>
         </div>
-        <Testimonials />
+        <HomeTestimonialSection />
       </div>
     </div>
   );

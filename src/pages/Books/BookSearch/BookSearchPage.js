@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./BookSearchPage.css";
+import { Pagination } from 'antd';
 
 const Card = ({ imageSrc, imageAlt, title, description }) => {
   const [isShowing, setIsShowing] = useState(false);
@@ -94,6 +95,7 @@ const CardGrid = () => {
         title="Card title"
         description="This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc."
       />
+      <Pagination defaultCurrent={1} total={50}/>
     </div>
   );
 };

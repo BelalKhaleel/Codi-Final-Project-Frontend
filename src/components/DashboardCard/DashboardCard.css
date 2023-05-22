@@ -17,9 +17,9 @@
   border-color: var(--accent-color);
 }
 
-/* .admin-count-card:hover p::after {
-  background-image: url("../../images/RMZNA-text-bg.png");
-} */
+.admin-count-card:hover p::after {
+  color: var(--accent-color);
+}
 
 .admin-count-card p::after {
   content: attr(data-admins-count);
@@ -30,7 +30,8 @@
   /* color: var(--secondary-color); */
   font-weight: 600;
   /* background: url("../../images/RMZNA-user-login-page.png.png"); */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  color: #fff;
   transition: 0.5s;
 }
