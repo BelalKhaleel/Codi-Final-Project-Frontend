@@ -21,6 +21,9 @@ function DashboardUsers() {
     fullName: "",
     email: "",
     password: "",
+    phoneNumber: "",
+    address: "",
+    isAdmin: false,
   });
 
   const [userEditData, setUserEditData] = useState({
@@ -82,7 +85,7 @@ function DashboardUsers() {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/user?page=${page}&limit=${perPage}`
       );
-      console.log(response)
+      console.log(response);
       setData(response.data.users);
       setTotalItems(response.data.totalItems);
       setIsLoading(false);
@@ -113,7 +116,9 @@ function DashboardUsers() {
       full_name: userAddData.fullName,
       email: userAddData.email,
       password: userAddData.password,
-      isAdmin: userAddData.isAdmin
+      phoneNumber: userAddData.phoneNumber,
+      address: userAddData.address,
+      isAdmin: userAddData.isAdmin,
     };
     try {
       const response = await axios.post(
@@ -134,6 +139,8 @@ function DashboardUsers() {
         fullName: "",
         email: "",
         password: "",
+        phoneNumber: "",
+        address: "",
         isAdmin: false,
       });
       setError(response.data.message);
@@ -241,6 +248,7 @@ function DashboardUsers() {
               style={{ width: "100%", fontSize: "1rem" }}
               name="fullName"
               autoFocus={isEdit ? true : false}
+              required={true}
               onChange={isEdit ? handleEditChange : handleFormChange}
               value={isEdit ? userEditData.fullName : userAddData.fullName}
             />
@@ -251,6 +259,7 @@ function DashboardUsers() {
               type="email"
               style={{ width: "100%", fontSize: "1rem" }}
               name="email"
+              required={true}
               onChange={isEdit ? handleEditChange : handleFormChange}
               value={isEdit ? userEditData.email : userAddData.email}
             />
@@ -261,18 +270,46 @@ function DashboardUsers() {
               type="password"
               style={{ width: "100%", fontSize: "1rem" }}
               name="password"
+              required={true}
               onChange={isEdit ? handleEditChange : handleFormChange}
               value={isEdit ? userEditData.password : userAddData.password}
             />
           </div>
-          <TextField
-          label="Is Admin"
-          type="radio"
-          style={{ width: "100%", fontSize: "1rem" }}
-          name="isAdmin"
-          onChange={isEdit? handleEditChange : handleFormChange}
-          value={true}
-          />
+          <div>
+            <TextField
+              label="Phone Number"
+              type="phone"
+              style={{ width: "100%", fontSize: "1rem" }}
+              name="phoneNumber"
+              required={true}
+              onChange={isEdit ? handleEditChange : handleFormChange}
+              value={
+                isEdit ? userEditData.phoneNumber : userAddData.phoneNumber
+              }
+            />
+          </div>
+          <div>
+            <TextField
+              label="Address"
+              type="text"
+              style={{ width: "100%", fontSize: "1rem" }}
+              name="address"
+              onChange={isEdit ? handleEditChange : handleFormChange}
+              value={isEdit ? userEditData.address : userAddData.address}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ marginRight: "8px", fontSize: "1rem" }}>
+              Is Admin?
+            </span>
+            <input
+              type="checkbox"
+              name="isAdmin"
+              onChange={isEdit ? handleEditChange : handleFormChange}
+              checked={isEdit ? userEditData.isAdmin : userAddData.isAdmin}
+            />
+            <span style={{ marginLeft: "4px", fontSize: "1rem" }}>true</span>
+          </div>
           <div>
             <MainButton
               name={isEdit ? "Edit" : "Add"}

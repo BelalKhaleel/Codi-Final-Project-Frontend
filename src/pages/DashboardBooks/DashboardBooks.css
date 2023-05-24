@@ -1,4 +1,4 @@
-/* .file-input__input {
+.file-input__input {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -24,4 +24,4 @@
 .file-input__label svg {
   height: 16px;
   margin-right: 4px;
-} */
+}

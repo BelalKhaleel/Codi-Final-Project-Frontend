@@ -24,7 +24,7 @@ function HomePage() {
       />
       <div className="homepage-hero-container">
         <h1 className="homepage-headline">
-          Unlock the Power of Books: Donate, Empower, Inspire!
+          Donate, Empower, Inspire!
         </h1>
         <Link to="/donate">
           <button className="homepage-backgroundimage-button">

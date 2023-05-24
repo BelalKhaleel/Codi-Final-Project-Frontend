@@ -1,10 +1,21 @@
+.donation-page-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 7%;
+  column-gap: 5rem;
+}
+
 .donation-page-form-container {
-  width: 40%;
-  margin: 50px auto;
+  min-width: 450px;
+  border: 1px solid lightgray;
+  padding: 1rem;
 }
 
 .book-donation-page-form {
   max-width: 500px;
+  border-radius: 10px;
   margin: 0 auto;
 }
 
@@ -26,8 +37,9 @@
 }
 
 .book-donation-page-fieldset {
-  /* border: none; */
-  padding: 30px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 0.5rem;
   margin: 0;
 }
 
@@ -64,6 +76,8 @@
 }
 
 .book-donation-page-form-btn {
+  display: block;
+  margin: 10px auto 0 auto;
   margin-top: 10px;
   font-size: 18px;
   background-color: var(--accent-color);
@@ -76,4 +90,20 @@
 
 .book-donation-page-form-btn:hover {
   background-color: var(--color);
+}
+
+.book-donation-page-guidelines {
+  align-self: flex-start;
+}
+
+
+.book-donation-page-guidelines span p{
+  font-size: 15px;
+}
+
+.book-donation-page-guidelines > span {
+  font-size: 20px;
+}
+.book-donation-page-accordian {
+  margin-top: 20px;
 }
