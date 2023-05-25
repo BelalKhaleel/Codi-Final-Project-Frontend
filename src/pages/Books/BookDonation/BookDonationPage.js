@@ -7,12 +7,15 @@ import { Collapse } from "antd";
 const { Panel } = Collapse;
 
 const text1 =
-  "After logging in, go to the donate page and fill up the form to donate a book. Provide all the necessary information such as the book title, author, condition, and any other details required.";
+  "Make sure to create an account and ensure that you are logged in so that you can donate a book.";
 
 const text2 =
-  "If someone is interested in your donated book, they will contact you using the information you provided in the donation form. You can then communicate with them to agree on the details of the delivery process, such as the meeting location or shipping arrangements.";
+  "After logging in, go to the donate page and fill up the form to donate a book. Provide all the necessary information such as the book title, author, condition, and any other details required.";
 
 const text3 =
+  "If someone is interested in your donated book, they will contact you using the information you provided in the donation form. You can then communicate with them to agree on the details of the delivery process, such as the meeting location or shipping arrangements.";
+
+const text4 =
   "Once the donation process has been successfully completed, go to your profile page and mark the donated book as no longer available. This will inform other users that the book has been donated and is no longer up for donation.";
 
 const BookDonationPage = () => {
@@ -81,6 +84,9 @@ const BookDonationPage = () => {
 
   return (
     <div>
+      <div className="donation-page-title">
+        <h1>Books for a Brighter Future: Donate Today!</h1>
+      </div>
       {/* <div className="donation-page-main-hero-section">
         <img src={hero-image} alt="book-donation"/>
       </div> */}
@@ -337,20 +343,25 @@ const BookDonationPage = () => {
           </form>
         </div>
         <div className="book-donation-page-guidelines">
-          <span>Before donating, please check out the following guidelines:</span>
+          <span>
+            Before donating, please check out the following guidelines:
+          </span>
           <div className="book-donation-page-accordian">
             <Collapse defaultActiveKey={["1"]} onChange={onChange}>
-              <Panel header="Step 1: Fill out the Donation Form" key="1">
+              <Panel header="Step 1: Make sure you're logged in" key="1">
                 <p>{text1}</p>
               </Panel>
-              <Panel
-                header="Step 2: Arrange Delivery with Interested Parties"
-                key="2"
-              >
+              <Panel header="Step 2: Fill out the Donation Form" key="2">
                 <p>{text2}</p>
               </Panel>
-              <Panel header="Step 3: Mark the Book as Donated" key="3">
+              <Panel
+                header="Step 3: Arrange Delivery with Interested Parties"
+                key="3"
+              >
                 <p>{text3}</p>
+              </Panel>
+              <Panel header="Step 4: Mark the Book as Donated" key="4">
+                <p>{text4}</p>
               </Panel>
             </Collapse>
           </div>

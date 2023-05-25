@@ -5,8 +5,7 @@ import BackgroundImage from "../../assets/images/book-donation.webp";
 import QuoteImage1 from "../../assets/images/bono.jpg";
 import QuoteImage2 from "../../assets/images/Helen-Keller.png";
 import QuoteImage3 from "../../assets/images/maya-angelou.jpg";
-import Testimonials from "../../components/testimonial/testimonial";
-import HomeTestimonialSection from "../../components/swiper/swiper";
+import HomeTestimonialSection from "../../components/testimonial/testimonial";
 
 function HomePage() {
   const [showAdditionalText, setShowAdditionalText] = useState(false);
@@ -17,22 +16,22 @@ function HomePage() {
 
   return (
     <div>
-      <img
-        src={BackgroundImage}
-        alt="Background"
-        className="homepage-background-image"
-      />
-      <div className="homepage-hero-container">
-        <h1 className="homepage-headline">
-          Donate, Empower, Inspire!
-        </h1>
-        <Link to="/donate">
-          <button className="homepage-backgroundimage-button">
-            Donate Now
-          </button>
-        </Link>
+       <div
+        className="homepage-hero-container"
+        style={{ backgroundImage: `url(${BackgroundImage})` }}
+      >
+        <div className="homepage-content">
+          <h1 className="homepage-headline">
+            Donate, Empower, Inspire!
+          </h1>
+          <Link to="/donate">
+            <button className="homepage-backgroundimage-button">
+              Donate Now
+            </button>
+          </Link>
+        </div>
       </div>
-      <div className="homepage-about-section">
+      <section className="homepage-about-section" id="about-section">
         <h2>About Our Book Donation Initiative</h2>
         <p>
           Our mission is to support university students in Lebanon by providing
@@ -67,6 +66,7 @@ function HomePage() {
         <button className="read-more-button" onClick={toggleAdditionalText}>
           {showAdditionalText ? "Read Less" : "Read More"}
         </button>
+        </section>
         <div className="homepage-quote-container">
           <div className="homepage-quote">
             <img
@@ -99,8 +99,7 @@ function HomePage() {
             </p>
           </div>
         </div>
-        <HomeTestimonialSection />
-      </div>
+        <HomeTestimonialSection id="#testimonials"/>
     </div>
   );
 }

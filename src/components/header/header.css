@@ -6,6 +6,8 @@
   padding: 20px;
   color: var(--color);
   height: 100px;
+  opacity: 0;
+  animation: header-fadeIn 2s ease-in-out forwards;
   box-shadow: 2px 2px 6px #00000055;
 }
 
@@ -44,7 +46,7 @@
 
 .header-nav-list a:hover {
   color: var(--accent-color);
-  text-shadow: 2px 2px 4px var(--accent-color);
+  /* text-shadow: 2px 2px 4px var(--accent-color); */
 }
 
 .header-nav-list a.active {
@@ -94,10 +96,6 @@
   }
 }
 
-.header {
-  opacity: 0;
-  animation: header-fadeIn 2s ease-in-out forwards;
-}
 
 /* toggle menu  */
 .toggle-menu {

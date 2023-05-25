@@ -17,9 +17,9 @@ const Footer = () => {
               <NavLink exact to="/" className="footer-link">
                 Home
               </NavLink>
-              <a href="#about-section" className="footer-link">
+              <NavLink to="/#about-section" className="footer-link">
                 About Us
-              </a>
+              </NavLink>
               <NavLink to="contact" className="footer-link">
                 Contact Us
               </NavLink>
@@ -42,6 +42,26 @@ const Footer = () => {
                   <NavLink to="/search" className="footer-link">
                     Search
                   </NavLink>
+                </li>
+              </ul>
+            </div>
+            <div className="footer-other-book-donation-websites">
+              <h3>Other Book Donation Sites</h3>
+              <ul>
+                <li>
+                  <a href="https://alphabeticalorder.org/en/" className="footer-link">
+                  alphabeticalorder.org
+                  </a>
+                </li>
+                <li>
+                  <a href="https://assabil.com/book-donations/#:~:text=ASSABIL%20Distributes%20books%20received%20through,public%20libraries%20and%20public%20schools." className="footer-link">
+                    ASSABIL Association
+                  </a>
+                </li>
+                <li>
+                  <a href="https://mtlebanonlibrary.org/265/Donate" className="footer-link">
+                    Mt. Lebanon Public Library
+                  </a>
                 </li>
               </ul>
             </div>

@@ -1,56 +1,118 @@
-.testimonial-section {
-  text-align: center;
-  margin-top: 50px;
+.swiper, swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  /* padding: 0px 18%; */
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+  display: block;
 }
 
-.testimonial-item {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--secondary-color);
-  border-radius: 5px;
-  color: var(--primary-color);
+.swiper-button-prev {
+  color: var(--accent);
 }
 
-.testimonial-name {
-  font-weight: bold;
-  margin-top: 10px;
+.swiper-button-next {
+  color: var(--accent);
 }
 
-.testimonial-description {
-  font-size: 14px;
-  color: var(--secondary-color);
+.swiper-slide:not(.swiper-slide-active) {
+  opacity: 0.3;
+  filter: blur(2px);
+  transform: scale(0.9);
+  transition: all 0.3s ease-in-out;
+  cursor: default;
 }
 
-/* Target the carousel arrows */
-.testimonial-carousel .carousel .control-arrow {
-color: var(--color2);
-/* background-color: var(--color2); */
+.swiper-slide:not(.swiper-slide-active) > div > a {
+  display: inline-block; /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
 }
 
-.carousel .control-next.control-arrow:before {
-  border-left: 8px solid var(--color);
-  opacity: 0.8;
-}
-
-.carousel .control-next.control-arrow:before:hover {
-  border-left: 8px solid var(--color);
+.swiper-slide-active {
   opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
 }
 
-.carousel .control-prev.control-arrow:before {
-  border-right: 8px solid var(--color);
+.testimonial-section {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2pc 40px;
 }
 
-.carousel.carousel-slider {
-  /* background: rgba(0,0,0,0.2); */
+.testimonial-section-title {
+  font-size: xx-large;
+  text-align: center;
+  margin: 70px auto 0;
 }
-/* Target the left arrow specifically
-.custom-carousel .carousel .control-arrow.control-prev {
-  /* Add your styles here */
-/* } */
 
-/* Target the right arrow specifically */
-/* .custom-carousel .carousel .control-arrow.control-next { */
-  /* Add your styles here 
-} */
+.testimonial-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px -6px var(--dark-primary);
+  padding: 2pc;
+  padding-top: 0;
+  /* margin: 3pc 0; */
+}
+
+.testimonial-hr {
+  color: var(--color);
+  border: 1px solid var(--color2);
+  border-radius: 1pc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px -6px var(--dark-primary);
+    padding: 2pc;
+    margin: 2pc auto;
+    max-width: 60%;
+  }
+
+  .swiper-button-prev {
+    margin-left: 1pc;
+  }
+
+  .swiper-button-next {
+    margin-right: 1pc;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .testimonial-section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 0;
+  }
+
+  .testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px -6px var(--dark-primary);
+    padding: 2pc;
+    margin: 2pc auto;
+    max-width: 55%;
+  }
+
+  .swiper-button-prev {
+    margin-left: 0;
+  }
+
+  .swiper-button-next {
+    margin-right: 0;
+  }
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  color: var(--color2);
+}

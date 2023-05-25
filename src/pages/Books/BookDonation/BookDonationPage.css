@@ -1,9 +1,15 @@
+.donation-page-title {
+  text-align: center;
+  color: var(--color);
+  margin-top: 32px;
+}
+
 .donation-page-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 30px 7%;
+  margin: 55px 7% 85px 7%;
   column-gap: 5rem;
 }
 

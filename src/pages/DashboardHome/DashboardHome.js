@@ -1,15 +1,3 @@
-// import React from "react";
-
-// const DashboardHome = () => {
-//   return (
-//     <div>
-//       <h1>dashboard home</h1>
-//     </div>
-//   )
-// }
-
-// export default DashboardHome;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./DashboardHome.css";
@@ -34,6 +22,7 @@ function DashboardHome() {
   const [countBooks, setCountBooks] = useState(0);
   const [countDonations, setCountDonations] = useState(0);
   const [countUniversities, setCountUniversities] = useState(0);
+  // const [latestDonation, setLatestDonation] = useState(null);
 
   ChartJS.register(
     ArcElement,
@@ -135,6 +124,12 @@ function DashboardHome() {
         `${process.env.REACT_APP_API_URL}/api/donation`
       );
       setCountDonations(response.data.totalItems);
+    //fetch the latest donation
+    // const donations = response.data.data;
+    // if (donations.length > 0) {
+    //   const latestDonation = donations[donations.length - 1];
+    //   setLatestDonation(latestDonation);
+    // }
     } catch (e) {
       console.log(e);
     }
@@ -184,6 +179,11 @@ function DashboardHome() {
           onClick={() => navigate("/dashboard-universities")}
           // style={{ flexGrow: 1 }}
         />
+         {/* <DashboardCard
+            title="Recent Donation"
+          dataCount={latestDonation ? latestDonation.donationAmount : 0}
+           onClick={() => navigate("/dashboard-donations")}
+        /> */}
       </div>
       <div className="dashboard-home-charts">
         <div className="dashboard-home-chart">

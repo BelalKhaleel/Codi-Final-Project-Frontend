@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
-import ContactUsImage from '../../assets/images/contact-us.png';
 import {
   // FaEnvelope,
   // FaMapMarkerAlt,
@@ -111,9 +110,7 @@ const ContactUs = () => {
 
   return (
     <div className="contact-us-page-container">
-      <div className="main-hero-section-contact">
-        <h2>Contact Us</h2>
-      </div>
+      <h1 className="contact-us-page-title">Don't hesitate to contact us!</h1>
       <div className="contact-us-container">
         <div className="contact-us-form-container">
           <form ref={form} onSubmit={sendEmail}>
@@ -168,8 +165,13 @@ const ContactUs = () => {
             </div>
           </form>
         </div>
-        <div className="contact-us-image-container">
-          <img className="contact-us-image" src={ContactUsImage} alt="contact-us" />
+        <div className="get-in-touch-section" id="get-in-touch-section">
+          <h2 className="get-in-touch-section-title">Get in touch</h2>
+          <ul>
+            <li>Provide us with your feedback</li>
+            <li>Report abuse</li>
+            <li>Suggest ways to improve the website</li>
+          </ul>
         </div>
       </div>
     </div>
