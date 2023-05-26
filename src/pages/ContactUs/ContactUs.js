@@ -4,14 +4,11 @@ import {
   FaEnvelope,
   FaGithub,
   FaPhone,
-  // FaInstagram,
   FaWhatsapp,
-  // FaFacebook,
 } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
-// import ContactPanel from "../../components/ContactPanel/ContactPanel";
 
 const ContactUs = () => {
   const form = useRef();
@@ -185,21 +182,27 @@ const ContactUs = () => {
             <h2>Get in touch!</h2>
             <div className="get-in-touch-section-icons">
               <span>
-                <a href="mailto:belalkhaleel19@gmail.com">
+                <a href="mailto:belalkhaleel19@gmail.com"
+                rel="noopener noreferrer"
+                target="_blank">
                   <i>
                     <FaEnvelope />
                   </i>
                 </a>
               </span>
               <span>
-                <a href="tel:+96176457539">
+                <a href="tel:+96176457539"
+                rel="noopener noreferrer"
+                target="_blank">
                   <i>
                     <FaPhone />
                   </i>
                 </a>
               </span>
               <span>
-                <a href="https://wa.me/96176457539">
+                <a href="https://wa.me/96176457539"
+                rel="noopener noreferrer"
+                target="_blank">
                   <i>
                     <FaWhatsapp />
                   </i>

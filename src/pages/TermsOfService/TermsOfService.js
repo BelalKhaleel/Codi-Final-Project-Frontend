@@ -56,7 +56,7 @@ const TermsOfServicePage = () => {
           </p>
         </ul>
       </div>
-      <div className="section">
+      <div className="privacy-policy-section">
         <h2 className="section-heading">Privacy Policy</h2>
         <ul className="section-list">
           <li>

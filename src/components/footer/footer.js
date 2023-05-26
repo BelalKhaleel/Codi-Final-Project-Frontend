@@ -65,6 +65,21 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+            <section className="policies-section">
+              <h3>Policies</h3>
+              <ul>
+                <li>
+              <NavLink to="/terms" className="footer-link">
+                Terms of Use
+              </NavLink>
+                </li>
+                <li>
+              <NavLink to="/terms#privacy-policy-section" className="footer-link">
+                Privacy Policy
+              </NavLink>
+                </li>
+              </ul>
+              </section>
           </div>
         </div>
         <div className="footer-copyright">

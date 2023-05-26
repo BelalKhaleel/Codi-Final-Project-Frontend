@@ -80,7 +80,7 @@
 
 .footer-links h3 {
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
 }
 
 .footer-other-book-donation-websites h3 {
@@ -109,7 +109,7 @@
 
 .footer-books h3 {
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
 }
 
 .footer-books ul {
@@ -126,6 +126,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.policies-section h3 {
+  margin-bottom: 1rem;
+}
+
+.policies-section li {
+  list-style: none;
 }
 
 .footer-copyright {
