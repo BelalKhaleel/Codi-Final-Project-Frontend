@@ -1,6 +1,7 @@
 .contact-us-page-title {
+  font-size: 2rem;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 40px;
 }
 
 .contact-us-page-container {
@@ -9,13 +10,14 @@
   gap: 2rem;
   min-height: 100vh;
   margin: auto;
+  /* Customize background-color and text color */
   /* background-color: var(--primary-color); */
   color: var(--color);
 }
 
 .contact-us-container {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   column-gap: 10%;
   margin-top: 40px;
@@ -50,9 +52,7 @@
   margin: 0;
   padding: 0;
   width: 100%;
-}
-
-.contact-us-form-container fieldset {
+  /* Customize border color and padding */
   border: 2px solid var(--primary-color);
   border-radius: 5px;
   padding: 1rem;
@@ -60,12 +60,12 @@
 }
 
 .contact-us-form-container legend {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
 }
 
 .contact-us-form-container label {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -75,7 +75,7 @@
   margin-bottom: 1rem;
   border-radius: 5px;
   border: 1px solid #444;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .contact-us-form-container textarea:focus {
@@ -96,7 +96,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .contact-us-page-submit-button:hover {
@@ -108,9 +108,80 @@
   width: 100%;
 }
 
-.get-in-touch-section {
-  
+.contact-us-page-left-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  row-gap: 50px;
 }
+
+.why-reach-out-section {
+  margin-top: 25px;
+  margin-right: -80px;
+}
+.why-reach-out-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+}
+
+.why-reach-out-section h3 {
+  /* font-size: 1.4rem; */
+  margin-bottom: 14px;
+}
+.why-reach-out-section li {
+  /* list-style: none; */
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.get-in-touch-section {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* padding: 60px 20px; */
+  }
+  
+  .get-in-touch-section h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .get-in-touch-section-icons {
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 10px;
+  }
+
+  .get-in-touch-section span {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .get-in-touch-section span i {
+    font-size: 1.8rem;
+  }
+  
+  .get-in-touch-section span:not(:last-child) i {
+    margin-right: 10px;
+  }
+  
+  .get-in-touch-section a {
+    display: flex;
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  .get-in-touch-section a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+  }
+
 /* Mobile styles */
 @media only screen and (max-width: 600px) {
   .contact-us-page-container {
@@ -148,9 +219,10 @@
 
 .error-message {
   color: var(--accent-color);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
 }
+
 .main-hero-section-contact {
   width: 100%;
   height: 350px;
@@ -168,7 +240,8 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* background-image: url("../../assets/images/); */
+  /* Specify background image URL and customize background properties */
+  /* background-image: url("../../assets/images/your-image.jpg"); */
   background-attachment: fixed;
   background-position: center;
   background-size: cover;

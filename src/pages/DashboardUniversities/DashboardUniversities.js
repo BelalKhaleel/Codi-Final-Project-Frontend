@@ -1,14 +1,3 @@
-// import React from "react";
-
-// const DashboardUniversities = () => {
-//   return (
-//     <div>
-//       <h1>dashboard universities</h1>
-//     </div>
-//   )
-// }
-
-// export default DashboardUniversities;
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";

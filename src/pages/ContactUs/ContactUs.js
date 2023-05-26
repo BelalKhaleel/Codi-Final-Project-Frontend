@@ -1,16 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 import {
-  // FaEnvelope,
-  // FaMapMarkerAlt,
-  // FaPhone,
+  FaEnvelope,
+  FaGithub,
+  FaPhone,
   // FaInstagram,
-  // FaWhatsapp,
+  FaWhatsapp,
   // FaFacebook,
 } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
+// import ContactPanel from "../../components/ContactPanel/ContactPanel";
 
 const ContactUs = () => {
   const form = useRef();
@@ -39,7 +40,8 @@ const ContactUs = () => {
           "template_6uy649e",
           {
             name: data.name,
-            message: data.message
+            email: data.email,
+            message: data.message,
           },
           "CNu08EDHjEOkh-fre"
         );
@@ -165,13 +167,57 @@ const ContactUs = () => {
             </div>
           </form>
         </div>
-        <div className="get-in-touch-section" id="get-in-touch-section">
-          <h2 className="get-in-touch-section-title">Get in touch</h2>
-          <ul>
-            <li>Provide us with your feedback</li>
-            <li>Report abuse</li>
-            <li>Suggest ways to improve the website</li>
-          </ul>
+        <div className="contact-us-page-left-container">
+          <div className="why-reach-out-section">
+            <h2>Why Reach Out?</h2>
+            <h3>We value your input! <br></br>Please reach out to us for any of the following reasons:</h3>
+            <ul>
+              <li>Provide us with your feedback</li>
+              <li>Help us improve user experience</li>
+              <li>Report abuse by other users</li>
+              <li>Request support or assistance</li>
+              <li>Report technical issues or bugs</li>
+              <li>Partnership or business inquiries</li>
+              <li>Privacy concerns or data protection queries</li>
+            </ul>
+          </div>
+          <div className="get-in-touch-section" id="get-in-touch-section">
+            <h2>Get in touch!</h2>
+            <div className="get-in-touch-section-icons">
+              <span>
+                <a href="mailto:belalkhaleel19@gmail.com">
+                  <i>
+                    <FaEnvelope />
+                  </i>
+                </a>
+              </span>
+              <span>
+                <a href="tel:+96176457539">
+                  <i>
+                    <FaPhone />
+                  </i>
+                </a>
+              </span>
+              <span>
+                <a href="https://wa.me/96176457539">
+                  <i>
+                    <FaWhatsapp />
+                  </i>
+                </a>
+              </span>
+              <span>
+                <a
+                  href="https://github.com/BelalKhaleel"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <i>
+                    <FaGithub />
+                  </i>
+                </a>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
