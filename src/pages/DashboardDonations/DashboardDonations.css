@@ -62,6 +62,23 @@
   width: 100%;
 }
 
+/* Small Screens */
+@media only screen and (max-width: 768px) {
+  .donation-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 55px 7% 85px 7%;
+    row-gap: 5rem;
+}
+
+.donation-page-form-container {
+  min-width: 360px;
+  border: 1px solid lightgray;
+  padding: 1rem;
+}
+}
 @media (max-width: 1200px) {
   .dashboard-donations {
     padding: 0 20px;

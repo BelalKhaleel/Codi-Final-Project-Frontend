@@ -6,6 +6,7 @@ import "./UserLogin.css";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
 import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 const UserLoginPage = () => {
   const navigate = useNavigate();
@@ -90,7 +91,8 @@ const UserLoginPage = () => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/register`,
-        signUp
+        signUp,
+        { withCredentials: true }
       );
       setIsLoading(false);
       setUserSignup({
@@ -119,13 +121,25 @@ const UserLoginPage = () => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/login`,
-        login
+        login,
+        { withCredentials: true }
       );
       setIsLoading(false);
 
       console.log(response);
 
       if (response.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          html: '<span>Log In Successful</span>',
+          timer: 1500,
+          timerProgressBar: true,
+          showCancelButton: false,
+          showConfirmButton: false,
+          color: '#fdfdfd',
+          background: '#810f05',
+        });
         const oneWeek = 7 * 24 * 60 * 60 * 1000;
         // Check if the user is an admin
         if (response.data.isAdmin === true) {

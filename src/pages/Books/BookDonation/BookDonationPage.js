@@ -61,8 +61,8 @@ const BookDonationPage = () => {
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/book`,
+        formData,
         {
-          formData,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -118,7 +118,6 @@ const BookDonationPage = () => {
                 name="course"
                 value={course}
                 onChange={(e) => setCourse(e.target.value)}
-                required
               />
 
               <label className="book-donation-page-label" htmlFor="author">
@@ -154,120 +153,114 @@ const BookDonationPage = () => {
                 onChange={(e) => setUniversity(e.target.value)}
                 required
               >
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue>
                   Select the university
-                </option>
-                <option value="Lebanese University (LU)">
-                  Lebanese University (LU)
-                </option>
-                <option value="American University of Beirut (AUB)">
-                  American University of Beirut (AUB)
-                </option>
-                <option value="Saint Joseph University (USJ)">
-                  Saint Joseph University (USJ)
-                </option>
-                <option value="Beirut Arab University (BAU)">
-                  Beirut Arab University (BAU)
-                </option>
-                <option value="University Saint Esprit - Kaslik (USEK)">
-                  University Saint Esprit - Kaslik (USEK)
-                </option>
-                <option value="Lebanese American University (LAU)">
-                  Lebanese American University (LAU)
-                </option>
-                <option value="Haigazian University (Haigazian)">
-                  Haigazian University (Haigazian)
-                </option>
-                <option value="University of Balamand (UOB)">
-                  University of Balamand (UOB)
-                </option>
-                <option value="Académie Libanaise des Beaux Arts (ALBA)">
-                  Académie Libanaise des Beaux Arts (ALBA)
-                </option>
-                <option value="La Sagesse University (ULS)">
-                  La Sagesse University (ULS)
-                </option>
-                <option value="Middle East University (MEU)">
-                  Middle East University (MEU)
-                </option>
-                <option value="Notre Dame University (NDU)">
-                  Notre Dame University (NDU)
-                </option>
-                <option value="Al Makassed University of Beirut (MUB)">
-                  Al Makassed University of Beirut (MUB)
-                </option>
-                <option value="Lebanese International University (LIU)">
-                  Lebanese International University (LIU)
-                </option>
-                <option value="Arab Open University (AOU)">
-                  Arab Open University (AOU)
-                </option>
-                <option value="Global University (GU)">
-                  Global University (GU)
-                </option>
-                <option value="Islamic University of Lebanon (IUL)">
-                  Islamic University of Lebanon (IUL)
-                </option>
-                <option value="Antonine University (UA)">
-                  Antonine University (UA)
                 </option>
                 <option value="Al Jinan University (JU)">
                   Al Jinan University (JU)
                 </option>
-                <option value="City University (CityU)">
-                  City University (CityU)
-                </option>
-                <option value="Rafic Hariri University (RHU)">
-                  Rafic Hariri University (RHU)
-                </option>
-                <option value="American University of Technology (AUT)">
-                  American University of Technology (AUT)
-                </option>
-                <option value="American University of Science & Technology (AUST)">
-                  American University of Science & Technology (AUST)
-                </option>
-                <option value="Modern University for Business & Sciences (MUBS)">
-                  Modern University for Business & Sciences (MUBS)
-                </option>
                 <option value="Al-Kafaat University (AKU)">
                   Al-Kafaat University (AKU)
                 </option>
-                <option value="University of Tripoli (UT)">
-                  University of Tripoli (UT)
-                </option>
-                <option value="Lebanese Canadian University (LCU)">
-                  Lebanese Canadian University (LCU)
-                </option>
-                <option value="Arts, Sciences & Technology University in Lebanon (AUL)">
-                  Arts, Sciences & Technology University in Lebanon (AUL)
+                <option value="American University of Beirut (AUB)">
+                  American University of Beirut (AUB)
                 </option>
                 <option value="American University of Culture and Education (AUCE)">
                   American University of Culture and Education (AUCE)
                 </option>
+                <option value="American University of Science & Technology (AUST)">
+                  American University of Science & Technology (AUST)
+                </option>
+                <option value="American University of Technology (AUT)">
+                  American University of Technology (AUT)
+                </option>
+                <option value="Antonine University (UA)">
+                  Antonine University (UA)
+                </option>
+                <option value="Arab Open University (AOU)">
+                  Arab Open University (AOU)
+                </option>
+                <option value="Arts, Sciences & Technology University in Lebanon (AUL)">
+                  Arts, Sciences & Technology University in Lebanon (AUL)
+                </option>
+                <option value="Azm University (Azm)">
+                  Azm University (Azm)
+                </option>
+                <option value="Beirut Arab University (BAU)">
+                  Beirut Arab University (BAU)
+                </option>
+                <option value="City University (CityU)">
+                  City University (CityU)
+                </option>
+                <option value="Global University (GU)">
+                  Global University (GU)
+                </option>
+                <option value="Haigazian University (Haigazian)">
+                  Haigazian University (Haigazian)
+                </option>
+                <option value="Holy Family University - Université Sainte Famille (USF)">
+                  Holy Family University - Université Sainte Famille (USF)
+                </option>
+                <option value="International University of Beirut (BIU)">
+                  International University of Beirut (BIU)
+                </option>
+                <option value="Islamic University of Lebanon (IUL)">
+                  Islamic University of Lebanon (IUL)
+                </option>
+                <option value="La Sagesse University (ULS)">
+                  La Sagesse University (ULS)
+                </option>
+                <option value="Lebanese American University (LAU)">
+                  Lebanese American University (LAU)
+                </option>
+                <option value="Lebanese Canadian University (LCU)">
+                  Lebanese Canadian University (LCU)
+                </option>
                 <option value="Lebanese German University (LGU)">
                   Lebanese German University (LGU)
+                </option>
+                <option value="Lebanese International University (LIU)">
+                  Lebanese International University (LIU)
+                </option>
+                <option value="Lebanese University (LU)">
+                  Lebanese University (LU)
+                </option>
+                <option value="Maaref University (MU)">
+                  Maaref University (MU)
+                </option>
+                <option value="Middle East University (MEU)">
+                  Middle East University (MEU)
+                </option>
+                <option value="Modern University for Business & Sciences (MUBS)">
+                  Modern University for Business & Sciences (MUBS)
+                </option>
+                <option value="Notre Dame University (NDU)">
+                  Notre Dame University (NDU)
+                </option>
+                <option value="Phoenicia University (PU)">
+                  Phoenicia University (PU)
+                </option>
+                <option value="Rafic Hariri University (RHU)">
+                  Rafic Hariri University (RHU)
+                </option>
+                <option value="Saint Joseph University (USJ)">
+                  Saint Joseph University (USJ)
+                </option>
+                <option value="The Holy Spirit University of Kaslik (USEK)">
+                  The Holy Spirit University of Kaslik (USEK)
                 </option>
                 <option value="Université Libano-Française de Technologie et des Sciences Appliqués (ULF)">
                   Université Libano-Française de Technologie et des Sciences
                   Appliqués (ULF)
                 </option>
-                <option value="Holy Family University - Université Sainte Famille (USF)">
-                  Holy Family University - Université Sainte Famille (USF)
+                <option value="University of Balamand (UOB)">
+                  University of Balamand (UOB)
                 </option>
                 <option value="University of Sciences &Arts in Lebanon (USAL)">
                   University of Sciences &Arts in Lebanon (USAL)
                 </option>
-                <option value="Phoenicia University (PU)">
-                  Phoenicia University (PU)
-                </option>
-                <option value="Maaref University (MU)">
-                  Maaref University (MU)
-                </option>
-                <option value="Azm University (Azm)">
-                  Azm University (Azm)
-                </option>
-                <option value="International University of Beirut (BIU)">
-                  International University of Beirut (BIU)
+                <option value="University of Tripoli (UT)">
+                  University of Tripoli (UT)
                 </option>
               </select>
 

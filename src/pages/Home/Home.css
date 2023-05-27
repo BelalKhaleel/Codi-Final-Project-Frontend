@@ -116,3 +116,31 @@
   font-style: italic;
   color: #555;
 }
+
+/*Small Screens*/
+@media screen and (max-width: 768px) {
+  .homepage-about-section {
+    padding: 0;
+  }
+
+  .homepage-quote-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .homepage-quote-text {
+    margin-bottom: 40px;
+  }
+
+  .homepage-quote:not(:last-child) {
+    margin-right: 0;
+  }
+}
+
+/* Medium Screens */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .homepage-quote-container {
+    padding: 0;
+  }
+}

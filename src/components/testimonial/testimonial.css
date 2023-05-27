@@ -104,6 +104,10 @@
     max-width: 55%;
   }
 
+  .testimonial-section-title {
+    margin: 0;
+    margin-bottom: -55px;
+  }
   .swiper-button-prev {
     margin-left: 0;
   }
