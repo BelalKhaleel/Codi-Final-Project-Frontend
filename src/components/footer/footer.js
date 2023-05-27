@@ -49,17 +49,20 @@ const Footer = () => {
               <h3>Other Book Donation Sites</h3>
               <ul>
                 <li>
-                  <a href="https://alphabeticalorder.org/en/" className="footer-link">
+                  <a href="https://alphabeticalorder.org/en/" className="footer-link"  rel="noopener noreferrer"
+                target="_blank">
                   alphabeticalorder.org
                   </a>
                 </li>
                 <li>
-                  <a href="https://assabil.com/book-donations/#:~:text=ASSABIL%20Distributes%20books%20received%20through,public%20libraries%20and%20public%20schools." className="footer-link">
+                  <a href="https://assabil.com/book-donations/#:~:text=ASSABIL%20Distributes%20books%20received%20through,public%20libraries%20and%20public%20schools." className="footer-link"  rel="noopener noreferrer"
+                target="_blank">
                     ASSABIL Association
                   </a>
                 </li>
                 <li>
-                  <a href="https://mtlebanonlibrary.org/265/Donate" className="footer-link">
+                  <a href="https://mtlebanonlibrary.org/265/Donate" className="footer-link"  rel="noopener noreferrer"
+                target="_blank">
                     Mt. Lebanon Public Library
                   </a>
                 </li>

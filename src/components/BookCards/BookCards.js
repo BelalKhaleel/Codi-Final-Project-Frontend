@@ -17,6 +17,7 @@ export default function Card(props) {
       setZIndex(zIndex + 1);
     }
   };
+  
   return (
     <>
       <div className={`card${isShowing ? " show" : ""}`} style={{ zIndex }}>
@@ -24,6 +25,7 @@ export default function Card(props) {
           <img
             className="cardimage"
             src="https://source.unsplash.com/300x225/?wave"
+            // src={`http://localhost:3000/${props.image}`}
             alt="wave"
           />
         </div>
