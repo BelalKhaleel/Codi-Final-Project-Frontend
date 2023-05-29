@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { isLoggedIn } from "../../App";
 import { useNavigate } from "react-router-dom";
 import TextField from "../../components/text-field/text-field";
 import MainButton from "../../components/button/button";
 import "./UserLogin.css";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
-import Cookies from "js-cookie";
+import cookie from "react-cookies";
 import Swal from "sweetalert2";
 
 const UserLoginPage = () => {
   const navigate = useNavigate();
+
   const handleButtonClick = () => {
     if (isAdmin) {
       navigate("/dashboard"); // Redirect to admin dashboard
@@ -18,7 +20,7 @@ const UserLoginPage = () => {
     }
   };
   
-
+  const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
     fullName: "",
@@ -89,7 +91,7 @@ const UserLoginPage = () => {
     setErrorMessage({ error: "" });
     setIsLoading(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/register`,
         signUp,
         { withCredentials: true }
@@ -103,6 +105,17 @@ const UserLoginPage = () => {
         password: "",
       });
       setSignup(false);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful',
+        text: "You have successfully registered!",
+        timer: 1500,
+        timerProgressBar: true,
+        showCancelButton: false,
+        showConfirmButton: false,
+        color: '#fdfdfd',
+        background: '#810f05',
+      });
     } catch (e) {
       console.log(e);
       setErrorMessage({ error: e.response.data.message });
@@ -125,10 +138,12 @@ const UserLoginPage = () => {
         { withCredentials: true }
       );
       setIsLoading(false);
+      setIsAdmin(response.data.isAdmin); // Set isAdmin state based on the response
 
       console.log(response);
 
       if (response.status === 200) {
+        setLoggedIn(true);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -140,24 +155,11 @@ const UserLoginPage = () => {
           color: '#fdfdfd',
           background: '#810f05',
         });
-        const oneWeek = 7 * 24 * 60 * 60 * 1000;
-        // Check if the user is an admin
-        if (response.data.isAdmin === true) {
-          Cookies.set("admin-token", response.data.token, {
-            expires: oneWeek,
-          });
-        Cookies.set("user-token", response.data.token, {
-          expires: oneWeek,
-        });
+        const token = response.data["user-token"];
+        console.log(response);
+        cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
       }
-        
-        Cookies.set("user-id", response.data.id);
-      } else {
-        console.error(response.data.message);
-      }
-
-      setIsAdmin(response.data.isAdmin); // Set isAdmin state based on the response
-
+      
       handleButtonClick();
     } catch (e) {
       console.log(e.message);

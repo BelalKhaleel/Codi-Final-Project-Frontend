@@ -16,15 +16,17 @@ import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import HomePage from "./pages/Home/Home.js";
 import PageNotFound from "./pages/NotFound/NotFound.js";
-// import PrivateRoutes from "./utils/privateRoutes";
+import PrivateRoutes from "./utils/privateRoutes";
 import Spinner from "./components/spinner/spinner";
 import TermsOfServicePage from "./pages/TermsOfService/TermsOfService";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
-// import UserSignupPage from "./pages/UserSignup/UserSignup.js";
+
+export const isLoggedIn = React.createContext();
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const location = useLocation();
   const isDashboardPath = location.pathname.startsWith("/dashboard");
@@ -35,11 +37,9 @@ function App() {
 
   // Don't render the header in Dashboard, Unauthorized, and NotFound pages
   const shouldRenderHeader =
-    !isDashboardPath &&
-    !isNotFoundPath &&
-    !isUnauthorizedPath
-    // !isAdminLoginPath &&
-    // !isUserLoginPath;
+    !isDashboardPath && !isNotFoundPath && !isUnauthorizedPath;
+  // !isAdminLoginPath &&
+  // !isUserLoginPath;
 
   useEffect(() => {
     // Simulate a delay in loading the page
@@ -49,6 +49,7 @@ function App() {
   }, []);
 
   return (
+      <isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
     <div className="App">
       {shouldRenderHeader && <Header />}
       {isLoading ? (
@@ -68,56 +69,63 @@ function App() {
           className="pages"
           style={shouldRenderHeader ? { marginTop: "0px" } : { marginTop: 0 }}
         >
-          <Routes>
-            <Route>
+            <Routes>
               <Route>
+                <Route>
+                  <Route exact path="/" element={<HomePage />} />
+                  {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
+                  <Route path="user-login" element={<UserLoginPage />} />
+                  <Route path="home" element={<HomePage />} />
+                  <Route path="donate" element={<BookDonationPage />} />
+                  <Route path="request" element={<BookRequestPage />} />
+                  <Route path="search" element={<BookSearchPage />} />
+                  <Route path="contact" element={<ContactUsPage />} />
+                  <Route path="terms" element={<TermsOfServicePage />} />
+                  <Route path="*" element={<PageNotFound />} />
+                  <Route path="unauthorized" element={<Unauthorized />} />
+                </Route>
+                <Route path="/" element={<PrivateRoutes />}>
+                  <Route path="/" element={<DashboardPage />}>
+                    <Route path="/dashboard" element={<DashboardHome />} />
+                    <Route
+                      path="/dashboard-users"
+                      element={<DashboardUsers />}
+                    />
+                    <Route
+                      path="/dashboard-donations"
+                      element={<DashboardDonations />}
+                    />
+                    <Route
+                      path="/dashboard-books"
+                      element={<DashboardBooks />}
+                    />
+                    <Route
+                      path="/dashboard-universities"
+                      element={<DashboardUniversities />}
+                    />
+                  </Route>
+                </Route>
+                {/* <Route exact path="/show-book" element={<HomePage />} /> */}
                 <Route exact path="/" element={<HomePage />} />
                 {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
                 <Route path="user-login" element={<UserLoginPage />} />
-                <Route path="home" element={<HomePage />} />
-                <Route path="donate" element={<BookDonationPage />} />
-                <Route path="request" element={<BookRequestPage />} />
-                <Route path="search" element={<BookSearchPage />} />
+                {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
+                <Route path="home-page" element={<HomePage />} />
+                <Route path="book-donate" element={<BookDonationPage />} />
+                <Route path="book-request" element={<BookRequestPage />} />
+                <Route path="book-search" element={<BookSearchPage />} />{" "}
+                {/* <Route path="books/show-books" element={<ShowBook />} /> */}
                 <Route path="contact" element={<ContactUsPage />} />
                 <Route path="terms" element={<TermsOfServicePage />} />
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
               </Route>
-              {/* <Route path="/" element={<PrivateRoutes />}> */}
-                <Route path="/" element={<DashboardPage />}>
-                  <Route path="/dashboard" element={<DashboardHome />} />
-                  <Route path="/dashboard-users" element={<DashboardUsers />} />
-                  <Route
-                    path="/dashboard-donations"
-                    element={<DashboardDonations />}
-                  />
-                  <Route path="/dashboard-books" element={<DashboardBooks />} />
-                  <Route
-                    path="/dashboard-universities"
-                    element={<DashboardUniversities />}
-                  />
-                </Route>
-              {/* </Route> */}
-              {/* <Route exact path="/show-book" element={<HomePage />} /> */}
-              {/* <Route exact path="/" element={<HomePage />} /> */}
-              {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
-              {/* <Route path="user-login" element={<UserLoginPage />} /> */}
-              {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
-              {/* <Route path="home-page" element={<HomePage />} /> */}
-              {/* <Route path="book-donate" element={<BookDonationPage />} /> */}
-              {/* <Route path="book-request" element={<BookRequestPage />} /> */}
-              {/* <Route path="book-search" element={<BookSearchPage />} />{" "} */}
-              {/* <Route path="books/show-books" element={<ShowBook />} /> */}
-              {/* <Route path="contact" element={<ContactUsPage />} /> */}
-              {/* <Route path="terms" element={<TermsOfServicePage />} /> */}
-              {/* <Route path="*" element={<PageNotFound />} /> */}
-              {/* <Route path="unauthorized" element={<Unauthorized />} /> */}
-            </Route>
-          </Routes>
+            </Routes>
         </div>
       )}
       {shouldRenderHeader && <Footer />}
     </div>
+      </isLoggedIn.Provider>
   );
 }
 

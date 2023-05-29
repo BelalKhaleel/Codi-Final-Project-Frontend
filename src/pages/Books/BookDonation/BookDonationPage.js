@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./BookDonationPage.css";
 import { Collapse } from "antd";
-// import image from "../../../assets/images/book_donations_2.jpg";
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
+// import jwt from 'jsonwebtoken';
 
 const { Panel } = Collapse;
 
@@ -29,6 +31,8 @@ const BookDonationPage = () => {
   const [condition, setCondition] = useState("");
   const [status, setStatus] = useState("");
   const [image, setImage] = useState(null);
+  const [cookies] = useCookies();
+  
 
   const onChange = (key) => {
     console.log(key);
@@ -48,8 +52,6 @@ const BookDonationPage = () => {
 
     try {
       const formData = new FormData();
-      // formData.append("contactName", contactName);
-      // formData.append("email", email);
       formData.append("title", bookTitle);
       formData.append("course", course);
       formData.append("author", author);
@@ -59,12 +61,19 @@ const BookDonationPage = () => {
       formData.append("status", status);
       formData.append("image", image);
 
+      const token = cookies["user-token"];
+      const secretKey = process.env.REACT_APP_JWT_SECRET;
+      const decodedToken = jwt_decode(token, secretKey);
+      const donorId = decodedToken.id;
+
+      formData.append("donor", donorId);
+
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/book`,
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "user-token": token,
           },
         }
       );
@@ -79,8 +88,6 @@ const BookDonationPage = () => {
       donateButton.innerText = "Donate";
     }
   };
-
-  // const heroImage = "../../../assets/images/book_donations_2.jpg";
 
   return (
     <div>
@@ -152,114 +159,116 @@ const BookDonationPage = () => {
                 value={university}
                 onChange={(e) => setUniversity(e.target.value)}
                 required
+                
               >
-                <option value="" disabled defaultValue>
+                <option value="" valuedisabled="true" >
                   Select the university
                 </option>
-                <option value="Al Jinan University (JU)">
+                
+                <option value="646b1e5b5caab8a2ecc44b90">
                   Al Jinan University (JU)
                 </option>
-                <option value="Al-Kafaat University (AKU)">
+                <option value="646b1e9f5caab8a2ecc44ba2">
                   Al-Kafaat University (AKU)
                 </option>
-                <option value="American University of Beirut (AUB)">
+                <option value="646b1da25caab8a2ecc44b63">
                   American University of Beirut (AUB)
                 </option>
-                <option value="American University of Culture and Education (AUCE)">
+                <option value="646b1ecf5caab8a2ecc44bae">
                   American University of Culture and Education (AUCE)
                 </option>
-                <option value="American University of Science & Technology (AUST)">
+                <option value="646b1e895caab8a2ecc44b9c">
                   American University of Science & Technology (AUST)
                 </option>
-                <option value="American University of Technology (AUT)">
+                <option value="646b1e7e5caab8a2ecc44b99">
                   American University of Technology (AUT)
                 </option>
-                <option value="Antonine University (UA)">
+                <option value="646b1e515caab8a2ecc44b8d">
                   Antonine University (UA)
                 </option>
-                <option value="Arab Open University (AOU)">
+                <option value="646b1e2d5caab8a2ecc44b84">
                   Arab Open University (AOU)
                 </option>
-                <option value="Arts, Sciences & Technology University in Lebanon (AUL)">
+                <option value="646b1ec55caab8a2ecc44bab">
                   Arts, Sciences & Technology University in Lebanon (AUL)
                 </option>
-                <option value="Azm University (Azm)">
+                <option value="646b1f1d5caab8a2ecc44bc3">
                   Azm University (Azm)
                 </option>
-                <option value="Beirut Arab University (BAU)">
+                <option value="646b1da25caab8a2ecc44b63">
                   Beirut Arab University (BAU)
                 </option>
-                <option value="City University (CityU)">
+                <option value="646b1e655caab8a2ecc44b93">
                   City University (CityU)
                 </option>
-                <option value="Global University (GU)">
+                <option value="646b1e3a5caab8a2ecc44b87">
                   Global University (GU)
                 </option>
-                <option value="Haigazian University (Haigazian)">
+                <option value="646b1dcc5caab8a2ecc44b6c">
                   Haigazian University (Haigazian)
                 </option>
-                <option value="Holy Family University - Université Sainte Famille (USF)">
+                <option value="646b1eef5caab8a2ecc44bb7">
                   Holy Family University - Université Sainte Famille (USF)
                 </option>
-                <option value="International University of Beirut (BIU)">
+                <option value="646b1f285caab8a2ecc44bc6">
                   International University of Beirut (BIU)
                 </option>
-                <option value="Islamic University of Lebanon (IUL)">
+                <option value="646b1e485caab8a2ecc44b8a">
                   Islamic University of Lebanon (IUL)
                 </option>
-                <option value="La Sagesse University (ULS)">
+                <option value="646b1def5caab8a2ecc44b75">
                   La Sagesse University (ULS)
                 </option>
-                <option value="Lebanese American University (LAU)">
+                <option value="646b1dc05caab8a2ecc44b69">
                   Lebanese American University (LAU)
                 </option>
-                <option value="Lebanese Canadian University (LCU)">
+                <option value="646b1f0c5caab8a2ecc44bc0">
                   Lebanese Canadian University (LCU)
                 </option>
-                <option value="Lebanese German University (LGU)">
+                <option value="646b1de15caab8a2ecc44b72">
                   Lebanese German University (LGU)
                 </option>
-                <option value="Lebanese International University (LIU)">
+                <option value="646b1e045caab8a2ecc44b7e">
                   Lebanese International University (LIU)
                 </option>
-                <option value="Lebanese University (LU)">
+                <option value="646b1d925caab8a2ecc44b60">
                   Lebanese University (LU)
                 </option>
-                <option value="Maaref University (MU)">
+                <option value="646b1e7e5caab8a2ecc44b99">
                   Maaref University (MU)
                 </option>
-                <option value="Middle East University (MEU)">
+                <option value="646b1eb85caab8a2ecc44ba8">
                   Middle East University (MEU)
                 </option>
-                <option value="Modern University for Business & Sciences (MUBS)">
+                <option value="646b1e2d5caab8a2ecc44b84">
                   Modern University for Business & Sciences (MUBS)
                 </option>
-                <option value="Notre Dame University (NDU)">
+                <option value="646b1dfb5caab8a2ecc44b78">
                   Notre Dame University (NDU)
                 </option>
-                <option value="Phoenicia University (PU)">
+                <option value="646b1f4a5caab8a2ecc44bce">
                   Phoenicia University (PU)
                 </option>
-                <option value="Rafic Hariri University (RHU)">
+                <option value="646b1e515caab8a2ecc44b8d">
                   Rafic Hariri University (RHU)
                 </option>
-                <option value="Saint Joseph University (USJ)">
+                <option value="646b1d925caab8a2ecc44b60">
                   Saint Joseph University (USJ)
                 </option>
-                <option value="The Holy Spirit University of Kaslik (USEK)">
+                <option value="646b1e785caab8a2ecc44b96">
                   The Holy Spirit University of Kaslik (USEK)
                 </option>
-                <option value="Université Libano-Française de Technologie et des Sciences Appliqués (ULF)">
+                <option value="646b1ed85caab8a2ecc44bb4">
                   Université Libano-Française de Technologie et des Sciences
                   Appliqués (ULF)
                 </option>
-                <option value="University of Balamand (UOB)">
+                <option value="646b1ddc5caab8a2ecc44b66">
                   University of Balamand (UOB)
                 </option>
-                <option value="University of Sciences &Arts in Lebanon (USAL)">
+                <option value="646b1ee55caab8a2ecc44bb1">
                   University of Sciences &Arts in Lebanon (USAL)
                 </option>
-                <option value="University of Tripoli (UT)">
+                <option value="646b1da25caab8a2ecc44b63">
                   University of Tripoli (UT)
                 </option>
               </select>
@@ -274,7 +283,7 @@ const BookDonationPage = () => {
                 onChange={(e) => setCondition(e.target.value)}
                 required
               >
-                <option value="" disabled selected>
+                <option value="" valuedisabled="true" >
                   Select the condition
                 </option>
                 <option value="Like New">Like New</option>
@@ -292,7 +301,7 @@ const BookDonationPage = () => {
                 onChange={(e) => setStatus(e.target.value)}
                 required
               >
-                <option value="" disabled selected>
+                <option value="" valuedisabled="true" >
                   Select the status
                 </option>
                 <option value="Available">Available</option>

@@ -66,12 +66,36 @@
   position: relative;
 }
 
+.header-logout-button {
+  background-color: var(--color2);
+  color: var(--secondary-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
 .header-login-button:hover {
   background-color: #038662;
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.header-logout-button:hover {
+  background-color: var(--color);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .header-login-button:active {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: header-moveDown 0.2s linear;
+}
+
+.header-logout-button:active {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   animation: header-moveDown 0.2s linear;
 }

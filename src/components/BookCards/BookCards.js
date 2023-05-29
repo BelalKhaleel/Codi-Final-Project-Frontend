@@ -24,9 +24,9 @@ export default function Card(props) {
         <div className="cardimage-holder">
           <img
             className="cardimage"
-            src="https://source.unsplash.com/300x225/?wave"
-            // src={`http://localhost:3000/${props.image}`}
-            alt="wave"
+            // src="https://source.unsplash.com/300x225/?wave"
+            src={`http://localhost:3000/${props.image}`}
+            alt="book"
           />
         </div>
         <div className="card-title">

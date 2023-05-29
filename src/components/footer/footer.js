@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="footer-responsive-top-side">
             <div className="footer-links">
               <h3>Navigation</h3>
-              <NavLink exact to="/" className="footer-link">
+              <NavLink to="/" className="footer-link">
                 Home
               </NavLink>
               <NavLink to="/#about-section" className="footer-link">
