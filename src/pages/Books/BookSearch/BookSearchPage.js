@@ -24,7 +24,7 @@ export default function Books() {
       .get(`${process.env.REACT_APP_API_URL}/api/book`)
       .then((response) => {
         console.log(response);
-        setData(response.data.data);
+        setData(response.data.items);
         setLoading(false);
       })
       .catch((error) => {
@@ -32,6 +32,7 @@ export default function Books() {
         console.log(error);
       });
   };
+
   return (
     <div className={`cards${isCardsShowing ? " showing" : ""}`}>
       <Card title="Books" handleCardsClick={handleCardsClick} />

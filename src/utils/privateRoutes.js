@@ -1,47 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import cookie from "react-cookies";
-import jwtDecode from "jwt-decode";
+import React from "react";
+import { Outlet, Navigate } from "react-router-dom";
+// import Cookies from "js-cookie";
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isValidToken, setIsValidToken] = useState(false);
 
-  useEffect(() => {
-    const validateToken = () => {
-      if (cookie.load("user-token") !== undefined) {
-        const token = cookie.load("user-token");
-        console.log(token);
-        if (token) {
-          try {
-            const decodedToken = jwtDecode(token);
-            const isAdmin = decodedToken.isAdmin;
-            setIsValidToken(isAdmin);
-          } catch (error) {
-            setIsValidToken(false);
-          }
-        } else {
-          setIsValidToken(false);
-        }
-        
-        setIsLoading(false);
-      };
-      
-      validateToken();
-    }
-    }, []);
-    
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+function PrivateRoutes() {
+  const [cookies] = useCookies();
+  const token = cookies["user-token"];
+      const secretKey = process.env.REACT_APP_JWT_SECRET;
+      const decodedToken = jwt_decode(token, secretKey);
+      const isAdmin = decodedToken.isAdmin;
+  return isAdmin ? <Outlet /> : <Navigate to="/unauthorized" />;
+}
 
-  if (isValidToken) {
-    return <Component {...rest} />;
-  } else {
-    navigate("/login");
-    return null;
-  }
-};
-
-export default PrivateRoute;
+export default PrivateRoutes;

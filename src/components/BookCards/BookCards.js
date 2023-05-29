@@ -24,13 +24,13 @@ export default function Card(props) {
         <div className="cardimage-holder">
           <img
             className="cardimage"
-            // src="https://source.unsplash.com/300x225/?wave"
-            src={`http://localhost:3000/${props.image}`}
+            src="https://source.unsplash.com/300x225/?wave"
+            // src={`http://localhost:3000/${props.image}`}
             alt="book"
           />
         </div>
         <div className="card-title">
-          <a
+          <button
             href="#"
             className="toggle-info btn"
             onClick={() => {
@@ -40,7 +40,7 @@ export default function Card(props) {
           >
             <span className="left"></span>
             <span className="right"></span>
-          </a>
+          </button>
           <h2>
             Card title
             <small>Image from unsplash.com</small>

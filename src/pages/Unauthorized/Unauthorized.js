@@ -8,7 +8,7 @@ const Unauthorized = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/admin-login");
+    navigate("/user-login");
   };
 
   return (
@@ -26,7 +26,7 @@ const Unauthorized = () => {
         This page is not publicly available.
       </p>
       <p className="unauthorized-description">
-        To access it, please login first.
+        To access it, you need to be an admin.
       </p>
       <MainButton
         name="Login"
