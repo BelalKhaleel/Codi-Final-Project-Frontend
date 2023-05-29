@@ -24,8 +24,8 @@ export default function Card(props) {
         <div className="cardimage-holder">
           <img
             className="cardimage"
-            src="https://source.unsplash.com/300x225/?wave"
-            // src={`http://localhost:3000/${props.image}`}
+            // src="https://source.unsplash.com/300x225/?wave"
+            src={`${process.env.REACT_APP_API_URL}/${props.image}`}
             alt="book"
           />
         </div>
@@ -42,19 +42,18 @@ export default function Card(props) {
             <span className="right"></span>
           </button>
           <h2>
-            Card title
-            <small>Image from unsplash.com</small>
+            {props.title}
+            <small>{props.course}</small>
           </h2>
         </div>
         <div className="card-flap flap1">
           <div className="card-description">
-            This grid is an attempt to make something nice that works on touch
-            devices. Ignoring hover states when they're not available etc.
+            {props.description}
           </div>
           <div className="card-flap flap2">
             <div className="card-actions">
               <a href="#" className="btn">
-                Read more
+                Donor info
               </a>
             </div>
           </div>

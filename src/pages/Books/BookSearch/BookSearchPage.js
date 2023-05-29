@@ -43,6 +43,8 @@ export default function Books() {
               key={e._id}
               id={e._id}
               name={e.name}
+              title={e.title}
+              course={e.course}
               image={e.image}
               handleCardsClick={handleCardsClick}
             />

@@ -1,18 +1,7 @@
-// import React from "react";
-
-// const DashboardBooks = () => {
-//   return (
-//     <div>
-//       <h1>dashboard books</h1>
-//     </div>
-//   )
-// }
-
-// export default DashboardBooks;
-
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
+import { useCookies } from "react-cookie";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
@@ -23,8 +12,11 @@ import DashboardHeroSection from "../../components/DashboardHeroSection/Dashboar
 import DashboardPopUp from "../../components/DashboardPopUp/DashboardPopUp";
 import "./DashboardBooks.css";
 import Spinner from "../../components/spinner/spinner";
+// import { Form } from "antd";
 
 function DashboardBooks() {
+  const [cookies] = useCookies();
+  const token = cookies["user-token"];
   const [data, setData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(0);
@@ -197,6 +189,7 @@ function DashboardBooks() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            "user-token": token
           },
         }
       );
@@ -280,14 +273,21 @@ function DashboardBooks() {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "var(--secondary-color)",
+      confirmButtonColor: "var(--color2)",
       cancelButtonColor: "var(--accent-color)",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
+
+      const token = cookies["user-token"];
+
       if (result.isConfirmed) {
         try {
           await axios
-            .delete(`${process.env.REACT_APP_API_URL}/api/book/${id}`)
+            .delete(`${process.env.REACT_APP_API_URL}/api/book/${id}`, {
+              headers: {
+                "user-token": token,
+              },
+            })
             .then((response) => {
               console.log(response.data);
               getBooks();

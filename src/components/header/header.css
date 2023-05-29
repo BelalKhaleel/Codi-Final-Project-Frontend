@@ -57,6 +57,8 @@
 .header-login-button {
   background-color: var(--accent-color);
   color: var(--secondary-color);
+  display: block;
+  width: 80px;
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
