@@ -152,7 +152,7 @@
   }
   .header-nav-list {
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
   }
   .header-logo-container {
     width: 200px;
