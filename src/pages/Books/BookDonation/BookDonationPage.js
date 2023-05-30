@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./BookDonationPage.css";
 import { Collapse } from "antd";
@@ -28,11 +28,26 @@ const BookDonationPage = () => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [university, setUniversity] = useState("");
+  const [universityList, setUniversityList] = useState([]);
   const [condition, setCondition] = useState("");
   const [status, setStatus] = useState("");
   const [image, setImage] = useState(null);
   const [cookies] = useCookies();
   
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/university`);
+        const universities = response.data;
+        setUniversityList(universities);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUniversities();
+  }, []);
 
   const onChange = (key) => {
     console.log(key);
@@ -165,113 +180,12 @@ const BookDonationPage = () => {
                   Select the university
                 </option>
                 
-                <option value="646b1e5b5caab8a2ecc44b90">
-                  Al Jinan University (JU)
-                </option>
-                <option value="646b1e9f5caab8a2ecc44ba2">
-                  Al-Kafaat University (AKU)
-                </option>
-                <option value="646b1da25caab8a2ecc44b63">
-                  American University of Beirut (AUB)
-                </option>
-                <option value="646b1ecf5caab8a2ecc44bae">
-                  American University of Culture and Education (AUCE)
-                </option>
-                <option value="646b1e895caab8a2ecc44b9c">
-                  American University of Science & Technology (AUST)
-                </option>
-                <option value="646b1e7e5caab8a2ecc44b99">
-                  American University of Technology (AUT)
-                </option>
-                <option value="646b1e515caab8a2ecc44b8d">
-                  Antonine University (UA)
-                </option>
-                <option value="646b1e2d5caab8a2ecc44b84">
-                  Arab Open University (AOU)
-                </option>
-                <option value="646b1ec55caab8a2ecc44bab">
-                  Arts, Sciences & Technology University in Lebanon (AUL)
-                </option>
-                <option value="646b1f1d5caab8a2ecc44bc3">
-                  Azm University (Azm)
-                </option>
-                <option value="646b1da25caab8a2ecc44b63">
-                  Beirut Arab University (BAU)
-                </option>
-                <option value="646b1e655caab8a2ecc44b93">
-                  City University (CityU)
-                </option>
-                <option value="646b1e3a5caab8a2ecc44b87">
-                  Global University (GU)
-                </option>
-                <option value="646b1dcc5caab8a2ecc44b6c">
-                  Haigazian University (Haigazian)
-                </option>
-                <option value="646b1eef5caab8a2ecc44bb7">
-                  Holy Family University - Université Sainte Famille (USF)
-                </option>
-                <option value="646b1f285caab8a2ecc44bc6">
-                  International University of Beirut (BIU)
-                </option>
-                <option value="646b1e485caab8a2ecc44b8a">
-                  Islamic University of Lebanon (IUL)
-                </option>
-                <option value="646b1def5caab8a2ecc44b75">
-                  La Sagesse University (ULS)
-                </option>
-                <option value="646b1dc05caab8a2ecc44b69">
-                  Lebanese American University (LAU)
-                </option>
-                <option value="646b1f0c5caab8a2ecc44bc0">
-                  Lebanese Canadian University (LCU)
-                </option>
-                <option value="646b1de15caab8a2ecc44b72">
-                  Lebanese German University (LGU)
-                </option>
-                <option value="646b1e045caab8a2ecc44b7e">
-                  Lebanese International University (LIU)
-                </option>
-                <option value="646b1d925caab8a2ecc44b60">
-                  Lebanese University (LU)
-                </option>
-                <option value="646b1e7e5caab8a2ecc44b99">
-                  Maaref University (MU)
-                </option>
-                <option value="646b1eb85caab8a2ecc44ba8">
-                  Middle East University (MEU)
-                </option>
-                <option value="646b1e2d5caab8a2ecc44b84">
-                  Modern University for Business & Sciences (MUBS)
-                </option>
-                <option value="646b1dfb5caab8a2ecc44b78">
-                  Notre Dame University (NDU)
-                </option>
-                <option value="646b1f4a5caab8a2ecc44bce">
-                  Phoenicia University (PU)
-                </option>
-                <option value="646b1e515caab8a2ecc44b8d">
-                  Rafic Hariri University (RHU)
-                </option>
-                <option value="646b1d925caab8a2ecc44b60">
-                  Saint Joseph University (USJ)
-                </option>
-                <option value="646b1e785caab8a2ecc44b96">
-                  The Holy Spirit University of Kaslik (USEK)
-                </option>
-                <option value="646b1ed85caab8a2ecc44bb4">
-                  Université Libano-Française de Technologie et des Sciences
-                  Appliqués (ULF)
-                </option>
-                <option value="646b1ddc5caab8a2ecc44b66">
-                  University of Balamand (UOB)
-                </option>
-                <option value="646b1ee55caab8a2ecc44bb1">
-                  University of Sciences &Arts in Lebanon (USAL)
-                </option>
-                <option value="646b1da25caab8a2ecc44b63">
-                  University of Tripoli (UT)
-                </option>
-              </select>
+                {universityList.map((university) => (
+          <option key={university._id} value={university._id}>
+            {university.name}
+          </option>
+        ))}
+      </select>
 
               <label className="book-donation-page-label" htmlFor="condition">
                 Condition:
@@ -318,26 +232,6 @@ const BookDonationPage = () => {
                 onChange={handleImageChange}
                 required
               />
-
-              {/* <label htmlFor="contactName">Your Name:</label>
-        <input
-          type="text"
-          id="contactName"
-          name="contactName"
-          value={contactName}
-          onChange={(e) => setContactName(e.target.value)}
-          required
-        /> */}
-
-              {/* <label htmlFor="email">Email Address:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /> */}
             </fieldset>
             <button className="book-donation-page-form-btn" type="submit">
               Donate
