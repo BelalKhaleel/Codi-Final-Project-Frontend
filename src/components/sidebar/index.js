@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { mainNavbarItems } from "./navbarItems";
 
@@ -9,9 +9,12 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { NavLink } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import Cookies from "js-cookie";
+import cookie from "react-cookies";
+import { isLoggedIn } from "../../App";
 
 const Sidebar = () => {
   const [isClosed, setIsClosed] = useState(true);
+  const [loggedIn, setLoggedIn] = useContext(isLoggedIn)
 
   const close = () => {
     document.querySelector(".sidebar").classList.toggle("close");
@@ -70,9 +73,8 @@ const Sidebar = () => {
             to="/user-login"
             className="sidebar-logout spacing hover"
             onClick={() => {
-              Cookies.remove("admin-token");
-              localStorage.removeItem("admin-full-name");
-              localStorage.removeItem("admin-email");
+              cookie.remove("user-token", {path : "/"});
+              setLoggedIn(false);
             }}
           >
             <p>

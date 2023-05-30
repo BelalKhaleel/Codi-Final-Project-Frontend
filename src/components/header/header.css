@@ -7,7 +7,7 @@
   color: var(--color);
   height: 100px;
   opacity: 0;
-  animation: header-fadeIn 2s ease-in-out forwards;
+  animation: header-fadeIn 1s ease-in-out forwards;
   box-shadow: 2px 2px 6px #00000055;
 }
 

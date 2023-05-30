@@ -50,13 +50,14 @@ function App() {
   const userIsLoggedIn = () => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_URL}/user/is-logged-in`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/user/is-logged-in`, {
         headers: { "user-token": cookie.load("user-token") },
       })
       .then((response) => {
         if (response.status === 200) {
           setLoggedIn(true);
           if (cookie.load("user-token").isAdmin) {
+            console.log("hooooooooooooooooo")
             setAdmin(true);
             setIsLoading(false);
           } else {
@@ -79,7 +80,7 @@ function App() {
 
   useEffect(() => {
     userIsLoggedIn();
-  }, []);
+  }, [loggedIn, admin]);
 
   return (
     <headerStatus.Provider value={[headerExpanded, setHeaderExpanded]}>

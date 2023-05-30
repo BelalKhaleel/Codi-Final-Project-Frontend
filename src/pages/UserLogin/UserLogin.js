@@ -1,9 +1,6 @@
 import React, { useState, useContext } from "react";
 import { isLoggedIn } from "../../App.js";
 import {isAdmin} from "../../App.js"
-import { Navigate, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import jwt_decode from "jwt-decode";
 import TextField from "../../components/text-field/text-field";
 import MainButton from "../../components/button/button";
 import "./UserLogin.css";
@@ -11,25 +8,11 @@ import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
 import cookie from "react-cookies";
 import Swal from "sweetalert2";
+import { Navigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const UserLoginPage = () => {
-  const [login, setLogin] = useContext(isLoggedIn);
-  const [admin] = useContext(isAdmin);
-  const navigate = useNavigate();
-  const [cookies] = useCookies();
-
-  const handleButtonClick = () => {
-    const token = cookies["user-token"];
-    const secretKey = process.env.REACT_APP_JWT_SECRET;
-    const decodedToken = jwt_decode(token, secretKey);
-    const adminId = decodedToken.isAdmin;
-    if (adminId) {
-      navigate("/dashboard"); // Redirect to admin dashboard
-    } else {
-      navigate(-1); // Navigate back to the previous page for non-admin users
-    }
-  };
-
+  const [admin, setAdmin] = useContext(isAdmin);
   const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
@@ -149,11 +132,17 @@ const UserLoginPage = () => {
       );
       setIsLoading(false);
      
-      console.log(response);
+      
 
       if (response.status === 200) {
+        const token = response.data["user-token"];
+        cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
+        const yalla = jwtDecode(token).isAdmin;
+        if (yalla) {
+          setAdmin(true);
+        }
+       
         setLoggedIn(true);
-        navigate("/");
         Swal.fire({
           icon: "success",
           title: "Success",
@@ -165,12 +154,9 @@ const UserLoginPage = () => {
           color: "#fdfdfd",
           background: "#810f05",
         });
-        const token = response.data["user-token"];
-        console.log(response);
-        cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
+        
       }
 
-      handleButtonClick();
     } catch (e) {
       console.log(e.message);
       setErrorMessage({ error: "Email or password is invalid" });

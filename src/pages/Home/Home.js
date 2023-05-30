@@ -11,7 +11,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 function HomePage() {
   const [showAdditionalText, setShowAdditionalText] = useState(false);
-  console.log(window.screen)
   const toggleAdditionalText = () => {
     setShowAdditionalText(!showAdditionalText);
   };
