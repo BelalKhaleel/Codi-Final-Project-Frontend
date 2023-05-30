@@ -21,12 +21,18 @@ import Spinner from "./components/spinner/spinner";
 import TermsOfServicePage from "./pages/TermsOfService/TermsOfService";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
+import axios from "axios";
+import cookie from "react-cookies";
 
 export const isLoggedIn = React.createContext();
+export const headerStatus = React.createContext();
+export const isAdmin = React.createContext();
 
 function App() {
+  const [headerExpanded, setHeaderExpanded] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const location = useLocation();
   const isDashboardPath = location.pathname.startsWith("/dashboard");
@@ -41,91 +47,127 @@ function App() {
   // !isAdminLoginPath &&
   // !isUserLoginPath;
 
+  const userIsLoggedIn = () => {
+    setIsLoading(true);
+    axios
+      .get(`${process.env.REACT_APP_URL}/user/is-logged-in`, {
+        headers: { "user-token": cookie.load("user-token") },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          setLoggedIn(true);
+          if (cookie.load("user-token").isAdmin) {
+            setAdmin(true);
+            setIsLoading(false);
+          } else {
+            setAdmin(false);
+            setIsLoading(false);
+          }
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => {
+        if (error.response === undefined) {
+          setLoggedIn(false);
+          setIsLoading(false);
+        } else {
+          setLoggedIn(false);
+          setIsLoading(false);
+        }
+      });
+  };
+
   useEffect(() => {
-    // Simulate a delay in loading the page
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    userIsLoggedIn();
   }, []);
 
   return (
+    <headerStatus.Provider value={[headerExpanded, setHeaderExpanded]}>
       <isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
-    <div className="App">
-      {shouldRenderHeader && <Header />}
-      {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            minHeight: "100vh",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Spinner />
-        </div>
-      ) : (
-        <div
-          className="pages"
-          style={shouldRenderHeader ? { marginTop: "0px" } : { marginTop: 0 }}
-        >
-            <Routes>
-              <Route>
-                <Route>
-                  <Route exact path="/" element={<HomePage />} />
-                  {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
-                  <Route path="user-login" element={<UserLoginPage />} />
-                  <Route path="home" element={<HomePage />} />
-                  <Route path="donate" element={<BookDonationPage />} />
-                  <Route path="request" element={<BookRequestPage />} />
-                  <Route path="search" element={<BookSearchPage />} />
-                  <Route path="contact" element={<ContactUsPage />} />
-                  <Route path="terms" element={<TermsOfServicePage />} />
-                  <Route path="*" element={<PageNotFound />} />
-                  <Route path="unauthorized" element={<Unauthorized />} />
-                </Route>
-                <Route path="/" element={<PrivateRoutes />}>
-                  <Route path="/" element={<DashboardPage />}>
-                    <Route path="/dashboard" element={<DashboardHome />} />
+        <isAdmin.Provider value={[admin, setAdmin]}>
+          <div className="App">
+            {shouldRenderHeader && <Header />}
+            {isLoading ? (
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  minHeight: "100vh",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Spinner />
+              </div>
+            ) : (
+              <div
+                className="pages"
+                style={
+                  shouldRenderHeader ? { marginTop: "0px" } : { marginTop: 0 }
+                }
+              >
+                <Routes>
+                  <Route>
+                    <Route>
+                      <Route exact path="/" element={<HomePage />} />
+                      {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
+                      <Route path="login" element={<UserLoginPage />} />
+                      <Route path="home" element={<HomePage />} />
+                      <Route path="donate" element={<BookDonationPage />} />
+                      <Route path="request" element={<BookRequestPage />} />
+                      <Route path="search" element={<BookSearchPage />} />
+                      <Route path="contact" element={<ContactUsPage />} />
+                      <Route path="terms" element={<TermsOfServicePage />} />
+                      <Route path="*" element={<PageNotFound />} />
+                      <Route path="unauthorized" element={<Unauthorized />} />
+                    </Route>
+                    <Route path="/" element={<PrivateRoutes />}>
+                      <Route path="/" element={<DashboardPage />}>
+                        <Route path="/dashboard" element={<DashboardHome />} />
+                        <Route
+                          path="/dashboard-users"
+                          element={<DashboardUsers />}
+                        />
+                        <Route
+                          path="/dashboard-donations"
+                          element={<DashboardDonations />}
+                        />
+                        <Route
+                          path="/dashboard-books"
+                          element={<DashboardBooks />}
+                        />
+                        <Route
+                          path="/dashboard-universities"
+                          element={<DashboardUniversities />}
+                        />
+                      </Route>
+                    </Route>
+                    {/* <Route exact path="/show-book" element={<HomePage />} /> */}
+                    <Route exact path="/" element={<HomePage />} />
+                    {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
+                    <Route path="user-login" element={<UserLoginPage />} />
+                    {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
+                    <Route path="home-page" element={<HomePage />} />
+                    <Route path="book-donate" element={<BookDonationPage />} />
+                    <Route path="book-request" element={<BookRequestPage />} />
                     <Route
-                      path="/dashboard-users"
-                      element={<DashboardUsers />}
-                    />
-                    <Route
-                      path="/dashboard-donations"
-                      element={<DashboardDonations />}
-                    />
-                    <Route
-                      path="/dashboard-books"
-                      element={<DashboardBooks />}
-                    />
-                    <Route
-                      path="/dashboard-universities"
-                      element={<DashboardUniversities />}
-                    />
+                      path="book-search"
+                      element={<BookSearchPage />}
+                    />{" "}
+                    {/* <Route path="books/show-books" element={<ShowBook />} /> */}
+                    <Route path="contact" element={<ContactUsPage />} />
+                    <Route path="terms" element={<TermsOfServicePage />} />
+                    <Route path="*" element={<PageNotFound />} />
+                    <Route path="unauthorized" element={<Unauthorized />} />
                   </Route>
-                </Route>
-                {/* <Route exact path="/show-book" element={<HomePage />} /> */}
-                <Route exact path="/" element={<HomePage />} />
-                {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
-                <Route path="user-login" element={<UserLoginPage />} />
-                {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
-                <Route path="home-page" element={<HomePage />} />
-                <Route path="book-donate" element={<BookDonationPage />} />
-                <Route path="book-request" element={<BookRequestPage />} />
-                <Route path="book-search" element={<BookSearchPage />} />{" "}
-                {/* <Route path="books/show-books" element={<ShowBook />} /> */}
-                <Route path="contact" element={<ContactUsPage />} />
-                <Route path="terms" element={<TermsOfServicePage />} />
-                <Route path="*" element={<PageNotFound />} />
-                <Route path="unauthorized" element={<Unauthorized />} />
-              </Route>
-            </Routes>
-        </div>
-      )}
-      {shouldRenderHeader && <Footer />}
-    </div>
+                </Routes>
+              </div>
+            )}
+            {shouldRenderHeader && <Footer />}
+          </div>
+        </isAdmin.Provider>
       </isLoggedIn.Provider>
+    </headerStatus.Provider>
   );
 }
 

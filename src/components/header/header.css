@@ -134,7 +134,8 @@
   top: 0;
   right: 0;
   margin: 1.5rem;
-  display: none;
+  z-index: 9999999;
+  /* display: none; */
 }
 
 @media screen and (max-width: 768px) {

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import { isLoggedIn } from "../../App";
-import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from "../../App.js";
+import {isAdmin} from "../../App.js"
+import { Navigate, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
 import TextField from "../../components/text-field/text-field";
@@ -12,11 +13,12 @@ import cookie from "react-cookies";
 import Swal from "sweetalert2";
 
 const UserLoginPage = () => {
+  const [login, setLogin] = useContext(isLoggedIn);
+  const [admin] = useContext(isAdmin);
   const navigate = useNavigate();
   const [cookies] = useCookies();
 
   const handleButtonClick = () => {
-
     const token = cookies["user-token"];
     const secretKey = process.env.REACT_APP_JWT_SECRET;
     const decodedToken = jwt_decode(token, secretKey);
@@ -27,7 +29,7 @@ const UserLoginPage = () => {
       navigate(-1); // Navigate back to the previous page for non-admin users
     }
   };
-  
+
   const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
@@ -49,7 +51,7 @@ const UserLoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+
 
   const emptySignupTextFields = () => {
     setUserSignup({
@@ -114,15 +116,15 @@ const UserLoginPage = () => {
       });
       setSignup(false);
       Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
+        icon: "success",
+        title: "Registration Successful",
         text: "You have successfully registered!",
         timer: 1500,
         timerProgressBar: true,
         showCancelButton: false,
         showConfirmButton: false,
-        color: '#fdfdfd',
-        background: '#810f05',
+        color: "#fdfdfd",
+        background: "#810f05",
       });
     } catch (e) {
       console.log(e);
@@ -146,28 +148,28 @@ const UserLoginPage = () => {
         { withCredentials: true }
       );
       setIsLoading(false);
-      setIsAdmin(response.data.isAdmin); // Set isAdmin state based on the response
-
+     
       console.log(response);
 
       if (response.status === 200) {
         setLoggedIn(true);
+        navigate("/");
         Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          html: '<span>Log In Successful</span>',
+          icon: "success",
+          title: "Success",
+          html: "<span>Log In Successful</span>",
           timer: 1500,
           timerProgressBar: true,
           showCancelButton: false,
           showConfirmButton: false,
-          color: '#fdfdfd',
-          background: '#810f05',
+          color: "#fdfdfd",
+          background: "#810f05",
         });
         const token = response.data["user-token"];
         console.log(response);
         cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
       }
-      
+
       handleButtonClick();
     } catch (e) {
       console.log(e.message);
@@ -186,7 +188,11 @@ const UserLoginPage = () => {
 
   return (
     <div className="user-login-page">
-      {/* <div className="user-login-background-effect-left"></div> */}
+      {loggedIn && admin ? (
+        <Navigate to="/dashboard" replace={true} />
+      ) : (
+        loggedIn && <Navigate to="/" replace={true} />
+      )}
 
       <div className="user-login-page-container">
         <div className="user-login-page-image"></div>
@@ -264,9 +270,7 @@ const UserLoginPage = () => {
             </form>
           </div>
         ) : (
-          <div
-            className="user-login-page-form"
-          >
+          <div className="user-login-page-form">
             <h2
               className="user-login-page-title"
               style={{ marginBottom: "30px" }}

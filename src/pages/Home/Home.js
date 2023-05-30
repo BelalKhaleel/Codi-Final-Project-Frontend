@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import BackgroundImage from "../../assets/images/book-donation.webp";
@@ -6,24 +6,42 @@ import QuoteImage1 from "../../assets/images/bono.jpg";
 import QuoteImage2 from "../../assets/images/Helen-Keller.png";
 import QuoteImage3 from "../../assets/images/maya-angelou.jpg";
 import HomeTestimonialSection from "../../components/testimonial/testimonial";
+import { headerStatus } from "../../App.js";
+import MenuIcon from "@mui/icons-material/Menu";
 
 function HomePage() {
   const [showAdditionalText, setShowAdditionalText] = useState(false);
-
+  console.log(window.screen)
   const toggleAdditionalText = () => {
     setShowAdditionalText(!showAdditionalText);
   };
+  const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
 
   return (
     <div>
-       <div
+      <div
         className="homepage-hero-container"
         style={{ backgroundImage: `url(${BackgroundImage})` }}
       >
+        <button
+          onClick={() => {
+            setHeaderExpanded(!headerExpanded);
+          }}
+        >
+          <MenuIcon
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              margin: "20px",
+              color: "white",
+              display: headerExpanded || window.screen.width > 470 ? "none" : "block",
+              fontSize: "30px",
+            }}
+          />
+        </button>
         <div className="homepage-content">
-          <h1 className="homepage-headline">
-            Donate, Empower, Inspire!
-          </h1>
+          <h1 className="homepage-headline">Donate, Empower, Inspire!</h1>
           <Link to="/donate">
             <button className="homepage-backgroundimage-button">
               Donate Now
@@ -66,40 +84,42 @@ function HomePage() {
         <button className="read-more-button" onClick={toggleAdditionalText}>
           {showAdditionalText ? "Read Less" : "Read More"}
         </button>
-        </section>
-        <div className="homepage-quote-container">
-          <div className="homepage-quote">
-            <img
-              src={QuoteImage2}
-              alt="Quote 2"
-              className="homepage-quote-image"
-            />
-            <p className="homepage-quote-text">
-            “Alone we can do so little, together we can do so much.” - Helen Keller.
-            </p>
-          </div>
-          <div className="homepage-quote">
-            <img
-              src={QuoteImage1}
-              alt="Quote 1"
-              className="homepage-quote-image"
-            />
-            <p className="homepage-quote-text">
-            "Books! I dunno if I ever told you this, but books are the greatest gift one person can give another." - Bono
-            </p>
-          </div>
-          <div className="homepage-quote">
-            <img
-              src={QuoteImage3}
-              alt="Quote 3"
-              className="homepage-quote-image"
-            />
-            <p className="homepage-quote-text">
-              "When you learn, teach. When you get, give." - Maya Angelou
-            </p>
-          </div>
+      </section>
+      <div className="homepage-quote-container">
+        <div className="homepage-quote">
+          <img
+            src={QuoteImage2}
+            alt="Quote 2"
+            className="homepage-quote-image"
+          />
+          <p className="homepage-quote-text">
+            “Alone we can do so little, together we can do so much.” - Helen
+            Keller.
+          </p>
         </div>
-        <HomeTestimonialSection id="#testimonials"/>
+        <div className="homepage-quote">
+          <img
+            src={QuoteImage1}
+            alt="Quote 1"
+            className="homepage-quote-image"
+          />
+          <p className="homepage-quote-text">
+            "Books! I dunno if I ever told you this, but books are the greatest
+            gift one person can give another." - Bono
+          </p>
+        </div>
+        <div className="homepage-quote">
+          <img
+            src={QuoteImage3}
+            alt="Quote 3"
+            className="homepage-quote-image"
+          />
+          <p className="homepage-quote-text">
+            "When you learn, teach. When you get, give." - Maya Angelou
+          </p>
+        </div>
+      </div>
+      <HomeTestimonialSection id="#testimonials" />
     </div>
   );
 }

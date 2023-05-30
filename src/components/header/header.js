@@ -6,9 +6,9 @@ import "./header.css";
 import bookup from "../../assets/images/Bookup branding-32.svg";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-
+import { headerStatus } from "../../App.js";
 const Header = () => {
-  const [headerExpanded, setHeaderExpanded] = useState(true);
+  const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
   const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
 
   const handleLogout = () => {
@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header className={headerExpanded ? "header" : "header header-collapsed"}>
-          {headerExpanded && (
+      {headerExpanded && (
         <button
           onClick={() => {
             setHeaderExpanded(!headerExpanded);
@@ -28,16 +28,22 @@ const Header = () => {
           <CloseIcon className="menu-icon" />
         </button>
       )}
-      {!headerExpanded && (
-        <button
-          onClick={() => {
-            setHeaderExpanded(!headerExpanded);
+
+      <button
+        onClick={() => {
+          console.log(headerExpanded);
+          setHeaderExpanded(!headerExpanded);
+        }}
+        className="toggle-menu"
+      >
+        <MenuIcon
+          style={{
+            display: headerExpanded ? "none" : "block",
           }}
-          className="toggle-menu"
-        >
-          <MenuIcon className="menu-icon" />
-        </button>
-      )}
+          className="menu-icon"
+        />
+      </button>
+
       <div className="header-logo-container">
         <img src={bookup} alt="Logo" className="header-logo" />
       </div>

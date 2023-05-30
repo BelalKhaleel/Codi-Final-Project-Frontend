@@ -8,7 +8,6 @@ import AccountRoundedIcon from "@mui/icons-material/AccountCircle";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { NavLink } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
-// import logo from "../../assets/images/Bookup branding-31.svg";
 import Cookies from "js-cookie";
 
 const Sidebar = () => {
@@ -29,7 +28,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar close">
       <div className="sidebar-admin-profile spacing">
         <p>
           <AccountRoundedIcon />

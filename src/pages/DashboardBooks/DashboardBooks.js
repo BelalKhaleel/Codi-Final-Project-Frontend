@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
@@ -90,14 +91,28 @@ function DashboardBooks() {
     },
     { field: "title", headerName: "Title", width: 200 },
     { field: "author", headerName: "Author", width: 200 },
-    { field: "course", headerName: "Course", width:100 },
+    { field: "course", headerName: "Course", width: 100 },
     { field: "description", headerName: "Description", width: 300 },
-    { field: "university", headerName: "University", width: 200 },
-    { field: "donor", headerName: "Donor", width: 200 },
-    { field: "recipient", headerName: "Recipient", width: 200 },
+    {
+      field: "university",
+      headerName: "University",
+      width: 200,
+      valueGetter: (params) => {
+        return params.row.university.name;
+      },
+    },
+    { field: "donor.fullName", headerName: "Donor full name", width: 200, valueGetter: (params) => {
+      return params.row.donor.fullName;
+    },},
+    { field: "donor.address", headerName: "Donor Address", width: 200, valueGetter: (params) => {
+      return params.row.donor.address.city;
+    },},
+    { field: "recipient", headerName: "Recipient", width: 200,  valueGetter: (params) => {
+      return params.row.recipient && params.row.recipient.name ? params.row.recipient.name : "None";
+    },},
     { field: "condition", headerName: "Condition", width: 200 },
     { field: "status", headerName: "Status", width: 200 },
-    
+
     {
       field: "actions",
       headerName: "Actions",
@@ -167,6 +182,25 @@ function DashboardBooks() {
     setBookEditData({ ...bookEditData, image: e.target.files[0] });
   };
 
+  const [university, setUniversity] = useState("");
+  const [universityList, setUniversityList] = useState([]);
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/university`
+        );
+        const universities = response.data;
+        setUniversityList(universities);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUniversities();
+  }, []);
+
   const addBook = async (e) => {
     e.preventDefault();
 
@@ -176,11 +210,19 @@ function DashboardBooks() {
     bookAddForm.append("author", bookAddData.author);
     bookAddForm.append("course", bookAddData.course);
     bookAddForm.append("description", bookAddData.description);
+    bookAddForm.append("university", bookAddData.university);
     bookAddForm.append("image", bookAddData.image);
     bookAddForm.append("condition", bookAddData.condition);
     bookAddForm.append("status", bookAddData.status);
-    bookAddForm.append("donor", bookAddData.donor._id);
+    bookAddForm.append("donor", bookAddData.user);
     bookAddForm.append("recipient", bookAddData.recipient._id);
+
+    const token = cookies["user-token"];
+    const secretKey = process.env.REACT_APP_JWT_SECRET;
+    const decodedToken = jwt_decode(token, secretKey);
+    const donorId = decodedToken.id;
+
+    bookAddData.append("donor", donorId);
 
     try {
       const response = await axios.post(
@@ -189,7 +231,7 @@ function DashboardBooks() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            "user-token": token
+            "user-token": token,
           },
         }
       );
@@ -226,6 +268,7 @@ function DashboardBooks() {
     bookEditForm.append("author", bookEditData.author);
     bookEditForm.append("course", bookEditData.course);
     bookEditForm.append("description", bookEditData.description);
+    bookEditForm.append("university", bookAddData.university);
     bookEditForm.append("image", bookEditData.image);
     bookEditForm.append("condition", bookEditData.condition);
     bookEditForm.append("status", bookEditData.status);
@@ -253,9 +296,16 @@ function DashboardBooks() {
         timer: 1500,
       });
       setBookEditData({
-        fullName: "",
-        email: "",
-        password: "",
+        title: "",
+        author: "",
+        course: "",
+        description: "",
+        university: "",
+        image: "",
+        condition: "",
+        status: "",
+        donor: "",
+        recipient: "",
       });
       setError(response.data.message);
       getBooks();
@@ -277,7 +327,6 @@ function DashboardBooks() {
       cancelButtonColor: "var(--accent-color)",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
-
       const token = cookies["user-token"];
 
       if (result.isConfirmed) {
@@ -291,12 +340,13 @@ function DashboardBooks() {
             .then((response) => {
               console.log(response.data);
               getBooks();
+              Swal.fire("Deleted!", "Your book has been deleted.", "success");
               // getUsers();
             });
         } catch (error) {
           console.log(error);
+          Swal.fire("Failed!", "Your book has not been deleted.", "error");
         }
-        Swal.fire("Deleted!", "Your book has been deleted.", "success");
       }
     });
   };
@@ -324,6 +374,7 @@ function DashboardBooks() {
 
   return (
     <div className="dashboard-admins onLoad">
+      {console.log(data)}
       <DashboardHeroSection title="Books" />
       {openPopup && (
         <DashboardPopUp
@@ -340,7 +391,9 @@ function DashboardBooks() {
           }
           onSubmit={isEdit ? editBook : addBook}
         >
-          <div style={{ color: "var(--accent-color)" }}>{error}</div>
+          <div style={{ color: "var(--accent-color)", display: "flex" }}>
+            {error}
+          </div>
           <div>
             <TextField
               label="Title"
@@ -382,239 +435,55 @@ function DashboardBooks() {
               name="description"
               onChange={isEdit ? handleEditChange : handleFormChange}
               value={
-                isEdit
-                  ? bookEditData.description
-                  : bookAddData.description
+                isEdit ? bookEditData.description : bookAddData.description
               }
             />
           </div>
           <label className="book-donation-page-label" htmlFor="university">
-              University:
-            </label>
-            <select
-              id="university"
-              name="university"
-            >
-              <option value="" disabled selected>
-                Select the university
-              </option>
-              <option value="Lebanese University (LU)">
-                Lebanese University (LU)
-              </option>
-              <option value="American University of Beirut (AUB)">
-                American University of Beirut (AUB)
-              </option>
-              <option value="Saint Joseph University (USJ)">
-                Saint Joseph University (USJ)
-              </option>
-              <option value="Beirut Arab University (BAU)">
-                Beirut Arab University (BAU)
-              </option>
-              <option value="University Saint Esprit - Kaslik (USEK)">
-                University Saint Esprit - Kaslik (USEK)
-              </option>
-              <option value="Lebanese American University (LAU)">
-                Lebanese American University (LAU)
-              </option>
-              <option value="Haigazian University (Haigazian)">
-                Haigazian University (Haigazian)
-              </option>
-              <option value="University of Balamand (UOB)">
-                University of Balamand (UOB)
-              </option>
-              <option value="Académie Libanaise des Beaux Arts (ALBA)">
-                Académie Libanaise des Beaux Arts (ALBA)
-              </option>
-              <option value="La Sagesse University (ULS)">
-                La Sagesse University (ULS)
-              </option>
-              <option value="Middle East University (MEU)">
-                Middle East University (MEU)
-              </option>
-              <option value="Notre Dame University (NDU)">
-                Notre Dame University (NDU)
-              </option>
-              <option value="Al Makassed University of Beirut (MUB)">
-                Al Makassed University of Beirut (MUB)
-              </option>
-              <option value="Lebanese International University (LIU)">
-                Lebanese International University (LIU)
-              </option>
-              <option value="Arab Open University (AOU)">
-                Arab Open University (AOU)
-              </option>
-              <option value="Global University (GU)">
-                Global University (GU)
-              </option>
-              <option value="Islamic University of Lebanon (IUL)">
-                Islamic University of Lebanon (IUL)
-              </option>
-              <option value="Antonine University (UA)">
-                Antonine University (UA)
-              </option>
-              <option value="Al Jinan University (JU)">
-                Al Jinan University (JU)
-              </option>
-              <option value="City University (CityU)">
-                City University (CityU)
-              </option>
-              <option value="Rafic Hariri University (RHU)">
-                Rafic Hariri University (RHU)
-              </option>
-              <option value="American University of Technology (AUT)">
-                American University of Technology (AUT)
-              </option>
-              <option value="American University of Science & Technology (AUST)">
-                American University of Science & Technology (AUST)
-              </option>
-              <option value="Modern University for Business & Sciences (MUBS)">
-                Modern University for Business & Sciences (MUBS)
-              </option>
-              <option value="Al-Kafaat University (AKU)">
-                Al-Kafaat University (AKU)
-              </option>
-              <option value="University of Tripoli (UT)">
-                University of Tripoli (UT)
-              </option>
-              <option value="Lebanese Canadian University (LCU)">
-                Lebanese Canadian University (LCU)
-              </option>
-              <option value="Arts, Sciences & Technology University in Lebanon (AUL)">
-                Arts, Sciences & Technology University in Lebanon (AUL)
-              </option>
-              <option value="American University of Culture and Education (AUCE)">
-                American University of Culture and Education (AUCE)
-              </option>
-              <option value="Lebanese German University (LGU)">
-                Lebanese German University (LGU)
-              </option>
-              <option value="Université Libano-Française de Technologie et des Sciences Appliqués (ULF)">
-                Université Libano-Française de Technologie et des Sciences
-                Appliqués (ULF)
-              </option>
-              <option value="Holy Family University - Université Sainte Famille (USF)">
-                Holy Family University - Université Sainte Famille (USF)
-              </option>
-              <option value="University of Sciences &Arts in Lebanon (USAL)">
-                University of Sciences &Arts in Lebanon (USAL)
-              </option>
-              <option value="Phoenicia University (PU)">
-                Phoenicia University (PU)
-              </option>
-              <option value="Maaref University (MU)">
-                Maaref University (MU)
-              </option>
-              <option value="Azm University (Azm)">Azm University (Azm)</option>
-              <option value="International University of Beirut (BIU)">
-                International University of Beirut (BIU)
-              </option>
-            </select>
-            <div>
-            <TextField
-              label="Donor"
-              type="text"
-              style={{ width: "100%", fontSize: "1rem" }}
-              name="donor"
-              onChange={isEdit ? handleEditChange : handleFormChange}
-              value={
-                isEdit
-                  ? bookEditData.donor
-                  : bookAddData.donor
-              }
-            />
-          </div>
-          <div>
-            <TextField
-              label="Recipient"
-              type="text"
-              style={{ width: "100%", fontSize: "1rem" }}
-              name="recipient"
-              onChange={isEdit ? handleEditChange : handleFormChange}
-              value={
-                isEdit
-                  ? bookEditData.recipient
-                  : bookAddData.recipient
-              }
-            />
-          </div>
-          <label htmlFor="condition">
-              Condition:
-            </label>
-            <select
-              id="condition"
-              name="condition"
-            >
-              <option value="" disabled selected>
-                Select the condition
-              </option>
-              <option value="Like New">Like New</option>
-              <option value="Good">Good</option>
-              <option value="Acceptable">Acceptable</option>
-            </select>
+            University:
+          </label>
+          <select
+            id="university"
+            name="university"
+            value={university}
+            onChange={(e) => setUniversity(e.target.value)}
+            required
+          >
+            <option value="" valuedisabled="true">
+              Select the university
+            </option>
 
-            <label htmlFor="status">
-              Status:
-            </label>
-            <select
-              id="status"
-              name="status"
-            >
-              <option value="" disabled selected>
-                Select the status
+            {universityList.map((university) => (
+              <option key={university._id} value={university._id}>
+                {university.name}
               </option>
-              <option value="Available">Available</option>
-              <option value="Not Available">Not Available</option>
-            </select>
-          {/* <div>
-            <TextField
-              label="price"
-              type="number"
-              style={{ width: "100%", fontSize: "1rem" }}
-              name="price"
-              onChange={isEdit ? handleEditChange : handleFormChange}
-              value={isEdit ? bookEditData.price : bookAddData.price}
-            />
-          </div> */}
-          {/* <div>
-            <label>
-              Category
-              <select
-                className="dashboard-admin-select"
-                name="category"
-                value={
-                  isEdit
-                    ? bookEditData.category.name
-                    : bookAddData.category.name
-                } // or formData.category.name
-                onChange={
-                  isEdit
-                    ? (e) =>
-                        setBookEditData({
-                          ...bookEditData,
-                          category: { _id: e.target.value },
-                        })
-                    : (e) =>
-                        setBookAddData({
-                          ...bookAddData,
-                          category: { _id: e.target.value },
-                        })
-                }
-              >
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div> */}
+            ))}
+          </select>
+          <label htmlFor="condition">Condition:</label>
+          <select id="condition" name="condition">
+            <option value="" disabled selected>
+              Select the condition
+            </option>
+            <option value="Like New">Like New</option>
+            <option value="Good">Good</option>
+            <option value="Acceptable">Acceptable</option>
+          </select>
+
+          <label htmlFor="status">Status:</label>
+          <select id="status" name="status">
+            <option value="" disabled selected>
+              Select the status
+            </option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+          </select>
           <div>
             <input
               type="file"
               name="image"
               id="file-input"
               onChange={isEdit ? handleEditImageChange : handleAddImageChange}
-              // value={isEdit ? bookEditData.image : bookAddData.image}
+              value={isEdit ? bookEditData.image : bookAddData.image}
               className="file-input__input"
             />
             <label className="file-input__label" htmlFor="file-input">

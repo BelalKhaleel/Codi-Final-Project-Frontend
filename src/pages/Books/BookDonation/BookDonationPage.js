@@ -33,12 +33,13 @@ const BookDonationPage = () => {
   const [status, setStatus] = useState("");
   const [image, setImage] = useState(null);
   const [cookies] = useCookies();
-  
 
   useEffect(() => {
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/university`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/university`
+        );
         const universities = response.data;
         setUniversityList(universities);
       } catch (error) {
@@ -174,18 +175,17 @@ const BookDonationPage = () => {
                 value={university}
                 onChange={(e) => setUniversity(e.target.value)}
                 required
-                
               >
-                <option value="" valuedisabled="true" >
+                <option value="" valuedisabled="true">
                   Select the university
                 </option>
-                
+
                 {universityList.map((university) => (
-          <option key={university._id} value={university._id}>
-            {university.name}
-          </option>
-        ))}
-      </select>
+                  <option key={university._id} value={university._id}>
+                    {university.name}
+                  </option>
+                ))}
+              </select>
 
               <label className="book-donation-page-label" htmlFor="condition">
                 Condition:
@@ -197,7 +197,7 @@ const BookDonationPage = () => {
                 onChange={(e) => setCondition(e.target.value)}
                 required
               >
-                <option value="" valuedisabled="true" >
+                <option value="" valuedisabled="true">
                   Select the condition
                 </option>
                 <option value="Like New">Like New</option>
@@ -215,7 +215,7 @@ const BookDonationPage = () => {
                 onChange={(e) => setStatus(e.target.value)}
                 required
               >
-                <option value="" valuedisabled="true" >
+                <option value="" valuedisabled="true">
                   Select the status
                 </option>
                 <option value="Available">Available</option>
