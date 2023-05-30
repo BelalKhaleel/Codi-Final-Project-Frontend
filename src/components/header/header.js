@@ -5,7 +5,7 @@ import cookie from "react-cookies";
 import "./header.css";
 import bookup from "../../assets/images/Bookup branding-32.svg";
 import CloseIcon from "@mui/icons-material/Close";
-// import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const [headerExpanded, setHeaderExpanded] = useState(true);
@@ -18,21 +18,26 @@ const Header = () => {
 
   return (
     <header className={headerExpanded ? "header" : "header header-collapsed"}>
-      <button
-        onClick={() => {
-          setHeaderExpanded(!headerExpanded);
-        }}
-        className="toggle-menu"
-      >
-        <CloseIcon />
-      </button>
-      {/* <button
-        onClick={() => {
-          setHeaderExpanded(!headerExpanded);
-        }}
-      >
-        <MenuIcon />
-      </button> */}
+          {headerExpanded && (
+        <button
+          onClick={() => {
+            setHeaderExpanded(!headerExpanded);
+          }}
+          className="toggle-menu"
+        >
+          <CloseIcon className="menu-icon" />
+        </button>
+      )}
+      {!headerExpanded && (
+        <button
+          onClick={() => {
+            setHeaderExpanded(!headerExpanded);
+          }}
+          className="toggle-menu"
+        >
+          <MenuIcon className="menu-icon" />
+        </button>
+      )}
       <div className="header-logo-container">
         <img src={bookup} alt="Logo" className="header-logo" />
       </div>

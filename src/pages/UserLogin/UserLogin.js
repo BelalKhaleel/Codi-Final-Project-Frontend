@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { isLoggedIn } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
 import TextField from "../../components/text-field/text-field";
 import MainButton from "../../components/button/button";
 import "./UserLogin.css";
@@ -11,9 +13,15 @@ import Swal from "sweetalert2";
 
 const UserLoginPage = () => {
   const navigate = useNavigate();
+  const [cookies] = useCookies();
 
   const handleButtonClick = () => {
-    if (isAdmin) {
+
+    const token = cookies["user-token"];
+    const secretKey = process.env.REACT_APP_JWT_SECRET;
+    const decodedToken = jwt_decode(token, secretKey);
+    const adminId = decodedToken.isAdmin;
+    if (adminId) {
       navigate("/dashboard"); // Redirect to admin dashboard
     } else {
       navigate(-1); // Navigate back to the previous page for non-admin users
@@ -258,17 +266,7 @@ const UserLoginPage = () => {
         ) : (
           <div
             className="user-login-page-form"
-            // style={{ padding: "20px 80px" }}
           >
-            {/* <div className="user-login-page-logo" style={{ marginBottom: 0 }}>
-              <img
-                src={logo}
-                alt="bookup-logo"
-                width="100%"
-                height="100%"
-                style={{ objectFit: "cover" }}
-              />
-            </div> */}
             <h2
               className="user-login-page-title"
               style={{ marginBottom: "30px" }}

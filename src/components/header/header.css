@@ -32,8 +32,13 @@
   margin-right: 25px;
 }
 
+.header-nav-list li:nth-last-child(2){
+  width: 99px;
+}
+
 .header-nav-list li:last-child {
-  margin-right: 0;
+  margin-right: 1rem;
+  width: 196px;
 }
 
 .header-nav-list a {
