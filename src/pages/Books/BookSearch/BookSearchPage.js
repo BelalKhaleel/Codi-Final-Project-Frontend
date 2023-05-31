@@ -36,7 +36,6 @@ export default function Books() {
 
   return (
     <div className={`cards${isCardsShowing ? " showing" : ""}`}>
-      <Card title="Books" handleCardsClick={handleCardsClick} />
       {Data &&
         Data.map((e) => {
           return (
