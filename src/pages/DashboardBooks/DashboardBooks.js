@@ -17,10 +17,12 @@ import Spinner from "../../components/spinner/spinner";
 
 function DashboardBooks() {
   const [cookies] = useCookies();
+  // eslint-disable-next-line
   const token = cookies["user-token"];
   const [data, setData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(0);
+  // eslint-disable-next-line
   const [perPage, setPerPage] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
   const [bookAddData, setBookAddData] = useState({
@@ -341,7 +343,6 @@ function DashboardBooks() {
               console.log(response.data);
               getBooks();
               Swal.fire("Deleted!", "Your book has been deleted.", "success");
-              // getUsers();
             });
         } catch (error) {
           console.log(error);
@@ -351,26 +352,16 @@ function DashboardBooks() {
     });
   };
 
+  // eslint-disable-next-line
   const handlePageChange = (params) => {
     setPage(params.page);
     console.log(page);
   };
 
+  // eslint-disable-next-line
   const handlePageSizeChange = (params) => {
     setPerPage(params.perPage);
   };
-
-  // const getUsers = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_API_URL}/api/category`
-  //     );
-  //     console.log(response.data);
-  //     setCategories(response.data);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   return (
     <div className="dashboard-admins onLoad">

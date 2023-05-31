@@ -12,8 +12,10 @@ import DashboardPopUp from "../../components/DashboardPopUp/DashboardPopUp";
 import Spinner from "../../components/spinner/spinner.js";
 function DashboardUniversities() {
   const [data, setData] = useState([]);
+  // eslint-disable-next-line
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(0);
+  // eslint-disable-next-line
   const [perPage, setPerPage] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -194,11 +196,13 @@ function DashboardUniversities() {
     });
   };
 
+  // eslint-disable-next-line
   const handlePageChange = (params) => {
     setPage(params.page);
     console.log(page);
   };
 
+  // eslint-disable-next-line
   const handlePageSizeChange = (params) => {
     setPerPage(params.perPage);
   };

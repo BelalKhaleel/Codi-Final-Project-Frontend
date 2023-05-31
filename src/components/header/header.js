@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { isLoggedIn } from "../../App";
 import { NavLink } from "react-router-dom";
 import cookie from "react-cookies";

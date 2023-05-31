@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import "./DashboardDonations.css";
@@ -99,9 +99,9 @@ function DashboardDonations() {
     }
   };
 
-  useEffect(() => {
-    getDonations();
-  }, [page, perPage]);
+  // useEffect(() => {
+  //   getDonations();
+  // }, [page, perPage]);
 
   const handleFormChange = (event) => {
     const value = event.target.value;

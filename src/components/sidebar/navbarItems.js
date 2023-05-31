@@ -1,5 +1,3 @@
-// import AccountRoundedIcon from "@mui/icons-material/AccountCircle";
-// import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import BookIcon from '@mui/icons-material/Book';
@@ -37,10 +35,4 @@ export const mainNavbarItems = [
     label: "Universities",
     route: "dashboard-universities",
   },
-  // {
-  //   id: 5,
-  //   icon: <CategoryRoundedIcon />,
-  //   label: "Categories",
-  //   route: "dashboard-categories",
-  // },
 ];

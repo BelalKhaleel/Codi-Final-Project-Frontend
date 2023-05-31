@@ -137,8 +137,8 @@ const UserLoginPage = () => {
       if (response.status === 200) {
         const token = response.data["user-token"];
         cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
-        const yalla = jwtDecode(token).isAdmin;
-        if (yalla) {
+        const checkAdmin = jwtDecode(token).isAdmin;
+        if (checkAdmin) {
           setAdmin(true);
         }
        
@@ -151,8 +151,8 @@ const UserLoginPage = () => {
           timerProgressBar: true,
           showCancelButton: false,
           showConfirmButton: false,
-          color: "#fdfdfd",
-          background: "#810f05",
+          color: "#810f05",
+          background: "#fdfdfd",
         });
         
       }
@@ -167,7 +167,7 @@ const UserLoginPage = () => {
 
   const validateEmail = () => {
     // Regular expression for email validation
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const emailRegex = String.raw`^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$`;
     console.log(email);
     return emailRegex.test(email);
   };
@@ -297,8 +297,8 @@ const UserLoginPage = () => {
                   <TextField
                     label="Address"
                     type="text"
-                    placeholder="Address (optional)"
-                    // required={true}
+                    required={true}
+                    placeholder="Address"
                     style={{ fontSize: "16px", padding: "15px" }}
                     name="address"
                     onChange={handleSignUpChange}

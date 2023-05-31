@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-// import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
 import BookDonationPage from "./pages/Books/BookDonation/BookDonationPage";
 import BookRequestPage from "./pages/Books/BookRequest/BookRequestPage";
 import BookSearchPage from "./pages/Books/BookSearch/BookSearchPage";
@@ -38,14 +37,10 @@ function App() {
   const isDashboardPath = location.pathname.startsWith("/dashboard");
   const isNotFoundPath = location.pathname === "*";
   const isUnauthorizedPath = location.pathname === "/unauthorized";
-  // const isAdminLoginPath = location.pathname === "/admin-login";
-  // const isUserLoginPath = location.pathname === "/user-login";
 
   // Don't render the header in Dashboard, Unauthorized, and NotFound pages
   const shouldRenderHeader =
     !isDashboardPath && !isNotFoundPath && !isUnauthorizedPath;
-  // !isAdminLoginPath &&
-  // !isUserLoginPath;
 
   const userIsLoggedIn = () => {
     setIsLoading(true);
@@ -111,7 +106,6 @@ function App() {
                   <Route>
                     <Route>
                       <Route exact path="/" element={<HomePage />} />
-                      {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
                       <Route path="login" element={<UserLoginPage />} />
                       <Route path="home" element={<HomePage />} />
                       <Route path="donate" element={<BookDonationPage />} />
@@ -143,11 +137,8 @@ function App() {
                         />
                       </Route>
                     </Route>
-                    {/* <Route exact path="/show-book" element={<HomePage />} /> */}
                     <Route exact path="/" element={<HomePage />} />
-                    {/* <Route path="admin-login" element={<AdminLoginPage />} /> */}
                     <Route path="user-login" element={<UserLoginPage />} />
-                    {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
                     <Route path="home-page" element={<HomePage />} />
                     <Route path="book-donate" element={<BookDonationPage />} />
                     <Route path="book-request" element={<BookRequestPage />} />
@@ -155,7 +146,6 @@ function App() {
                       path="book-search"
                       element={<BookSearchPage />}
                     />{" "}
-                    {/* <Route path="books/show-books" element={<ShowBook />} /> */}
                     <Route path="contact" element={<ContactUsPage />} />
                     <Route path="terms" element={<TermsOfServicePage />} />
                     <Route path="*" element={<PageNotFound />} />

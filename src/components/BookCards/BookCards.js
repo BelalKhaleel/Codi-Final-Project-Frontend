@@ -52,9 +52,9 @@ export default function Card(props) {
           </div>
           <div className="card-flap flap2">
             <div className="card-actions">
-              <a href="#" className="btn">
+              <button href="#" className="btn">
                 Donor info
-              </a>
+              </button>
             </div>
           </div>
         </div>

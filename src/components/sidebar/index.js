@@ -8,12 +8,12 @@ import AccountRoundedIcon from "@mui/icons-material/AccountCircle";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { NavLink } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
-import Cookies from "js-cookie";
 import cookie from "react-cookies";
 import { isLoggedIn } from "../../App";
 
 const Sidebar = () => {
   const [isClosed, setIsClosed] = useState(true);
+  // eslint-disable-next-line
   const [loggedIn, setLoggedIn] = useContext(isLoggedIn)
 
   const close = () => {

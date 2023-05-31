@@ -97,7 +97,8 @@ function DashboardUsers() {
 
   useEffect(() => {
     getUsers();
-  }, [page, perPage]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleFormChange = (event) => {
     const value = event.target.value;

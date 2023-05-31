@@ -1,4 +1,4 @@
-a.btn , button.btn{
+button.btn {
   background: #0096a0;
   border-radius: 4px;
   box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
@@ -10,15 +10,18 @@ a.btn , button.btn{
   transition: all 0.1s 0s ease-out;
 }
 
-.no-touch a.btn:hover , .no-touch button.btn:hover {
+button.btn:hover {
+  cursor: pointer;
+}
+
+.no-touch button.btn:hover {
   background: #00a2ad;
   box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
   transform: translateY(-2px);
   transition: all 0.25s 0s ease-out;
 }
 
-.no-touch a.btn:active,
-a.btn:active, .no-touch button.btn:active, button.btn:active {
+.no-touch button.btn:active, button.btn:active {
   background: #008a93;
   box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
   transform: translate3d(0, 1px, 0);
@@ -139,7 +142,6 @@ div.card div.flap2 {
 }
 
 div.cards.showing div.card {
-  cursor: pointer;
   opacity: 0.6;
   transform: scale(0.88);
 }
