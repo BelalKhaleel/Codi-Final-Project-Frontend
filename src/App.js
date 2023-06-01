@@ -28,7 +28,7 @@ export const headerStatus = React.createContext();
 export const isAdmin = React.createContext();
 
 function App() {
-  const [headerExpanded, setHeaderExpanded] = useState(true);
+  const [headerExpanded, setHeaderExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [admin, setAdmin] = useState(false);

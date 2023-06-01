@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "./BookCards.css";
-
+import SimpleDialog from "../Dialog";
 export default function Card(props) {
   const [isShowing, setIsShowing] = useState(false);
   const [zIndex, setZIndex] = useState(10);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     if (isShowing) {
@@ -17,7 +18,14 @@ export default function Card(props) {
       setZIndex(zIndex + 1);
     }
   };
-  
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
   return (
     <>
       <div className={`card${isShowing ? " show" : ""}`} style={{ zIndex }}>
@@ -52,9 +60,12 @@ export default function Card(props) {
           </div>
           <div className="card-flap flap2">
             <div className="card-actions">
-              <button href="#" className="btn">
-                Donor info
-              </button>
+              <button href="#" className="btn" >
+              <SimpleDialog
+        open={open}
+        onClose={handleClose}
+      />              </button>
+
             </div>
           </div>
         </div>

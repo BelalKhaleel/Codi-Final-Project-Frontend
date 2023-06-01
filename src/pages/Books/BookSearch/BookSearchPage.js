@@ -22,7 +22,7 @@ export default function Books() {
 
   const getData = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/book`)
+      .get(`https://book-backend-9w5t.onrender.com/api/book`)
       .then((response) => {
         console.log(response);
         setData(response.data.items);

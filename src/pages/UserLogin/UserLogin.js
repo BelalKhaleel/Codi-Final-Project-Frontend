@@ -87,7 +87,6 @@ const UserLoginPage = () => {
       await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/register`,
         signUp,
-        { withCredentials: true }
       );
       setIsLoading(false);
       setUserSignup({
@@ -128,7 +127,6 @@ const UserLoginPage = () => {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/login`,
         login,
-        { withCredentials: true }
       );
       setIsLoading(false);
      

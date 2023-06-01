@@ -7,9 +7,13 @@ import bookup from "../../assets/images/Bookup branding-32.svg";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { headerStatus } from "../../App.js";
+import { useMediaQuery, useTheme } from "@mui/material";
+
 const Header = () => {
   const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
   const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleLogout = () => {
     cookie.remove("user-token", { path: "/" });
@@ -29,20 +33,22 @@ const Header = () => {
         </button>
       )}
 
-      <button
-        onClick={() => {
-          console.log(headerExpanded);
-          setHeaderExpanded(!headerExpanded);
-        }}
-        className="toggle-menu"
-      >
-        <MenuIcon
-          style={{
-            display: headerExpanded ? "none" : "block",
+      {isTablet && (
+        <button
+          onClick={() => {
+            console.log(headerExpanded);
+            setHeaderExpanded(!headerExpanded);
           }}
-          className="menu-icon"
-        />
-      </button>
+          className="toggle-menu"
+        >
+          <MenuIcon
+            style={{
+              display: headerExpanded ? "none" : "block",
+            }}
+            className="menu-icon"
+          />
+        </button>
+      )}
 
       <div className="header-logo-container">
         <img src={bookup} alt="Logo" className="header-logo" />

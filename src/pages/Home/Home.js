@@ -8,12 +8,16 @@ import QuoteImage3 from "../../assets/images/maya-angelou.jpg";
 import HomeTestimonialSection from "../../components/testimonial/testimonial";
 import { headerStatus } from "../../App.js";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 function HomePage() {
   const [showAdditionalText, setShowAdditionalText] = useState(false);
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
   const toggleAdditionalText = () => {
     setShowAdditionalText(!showAdditionalText);
   };
+  // eslint-disable-next-line
   const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
 
   return (
@@ -22,23 +26,27 @@ function HomePage() {
         className="homepage-hero-container"
         style={{ backgroundImage: `url(${BackgroundImage})` }}
       >
-        <button
+        {isTablet && <button
           onClick={() => {
-            setHeaderExpanded(!headerExpanded);
+            setHeaderExpanded((prev) => !prev);
+          }}
+          style={{
+            display: isTablet ? "block" : "none",
           }}
         >
           <MenuIcon
-            style={{
+            sx={{
+              display: isTablet ? "block" : "none",
               position: "absolute",
               top: 0,
               right: 0,
               margin: "20px",
               color: "white",
-              display: headerExpanded || window.screen.width > 470 ? "none" : "block",
               fontSize: "30px",
+              cursor: "pointer",
             }}
           />
-        </button>
+        </button>}
         <div className="homepage-content">
           <h1 className="homepage-headline">Donate, Empower, Inspire!</h1>
           <Link to="/donate">
