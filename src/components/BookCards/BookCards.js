@@ -6,6 +6,8 @@ import DonorInfoModal from "../DonorModal/DonorModal";
 export default function Card(props) {
   const [isShowing, setIsShowing] = useState(false);
   const [zIndex, setZIndex] = useState(10);
+  console.log(props, "book");
+
   const handleClick = () => {
     if (isShowing) {
       setIsShowing(false);
@@ -52,10 +54,10 @@ export default function Card(props) {
           <div className="card-flap flap2">
             <div className="card-actions">
             <DonorInfoModal
-                fullName="Belal"
-                email="belalkhaleel"
-                phoneNumber="56156"
-                address="basra"
+                 fullName={props.fullName}
+                 email={props.email}
+                 phoneNumber={props.phoneNumber}
+                 address={props.address}
               />
             </div>
           </div>
