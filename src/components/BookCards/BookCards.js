@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "./BookCards.css";
-import SimpleDialog from "../Dialog";
+import DonorInfoModal from "../DonorModal/DonorModal";
+
 export default function Card(props) {
   const [isShowing, setIsShowing] = useState(false);
   const [zIndex, setZIndex] = useState(10);
-  const [open, setOpen] = useState(false);
-
   const handleClick = () => {
     if (isShowing) {
       setIsShowing(false);
@@ -18,21 +17,13 @@ export default function Card(props) {
       setZIndex(zIndex + 1);
     }
   };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value) => {
-    setOpen(false);
-  };
+  
   return (
     <>
       <div className={`card${isShowing ? " show" : ""}`} style={{ zIndex }}>
         <div className="cardimage-holder">
           <img
             className="cardimage"
-            // src="https://source.unsplash.com/300x225/?wave"
             src={`${process.env.REACT_APP_API_URL}/${props.image}`}
             alt="book"
           />
@@ -60,12 +51,12 @@ export default function Card(props) {
           </div>
           <div className="card-flap flap2">
             <div className="card-actions">
-              <button href="#" className="btn" >
-              <SimpleDialog
-        open={open}
-        onClose={handleClose}
-      />              </button>
-
+            <DonorInfoModal
+                fullName="Belal"
+                email="belalkhaleel"
+                phoneNumber="56156"
+                address="basra"
+              />
             </div>
           </div>
         </div>
