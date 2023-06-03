@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { isLoggedIn } from "../../App.js";
-import {isAdmin} from "../../App.js"
+import { isAdmin } from "../../App.js";
 import TextField from "../../components/text-field/text-field";
 import MainButton from "../../components/button/button";
 import "./UserLogin.css";
@@ -34,7 +34,6 @@ const UserLoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(true);
-
 
   const emptySignupTextFields = () => {
     setUserSignup({
@@ -86,7 +85,7 @@ const UserLoginPage = () => {
     try {
       await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/register`,
-        signUp,
+        signUp
       );
       setIsLoading(false);
       setUserSignup({
@@ -108,6 +107,17 @@ const UserLoginPage = () => {
         color: "#fdfdfd",
         background: "#810f05",
       });
+          // Automatically sign in the user
+    const login = {
+      email: userSignup.email,
+      password: userSignup.password,
+    };
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/login`, login);
+    if (response.status === 200) {
+      const token = response.data["user-token"];
+      cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
+      setLoggedIn(true);
+    }
     } catch (e) {
       console.log(e);
       setErrorMessage({ error: e.response.data.message });
@@ -126,11 +136,9 @@ const UserLoginPage = () => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/login`,
-        login,
+        login
       );
       setIsLoading(false);
-     
-      
 
       if (response.status === 200) {
         const token = response.data["user-token"];
@@ -139,7 +147,7 @@ const UserLoginPage = () => {
         if (checkAdmin) {
           setAdmin(true);
         }
-       
+
         setLoggedIn(true);
         Swal.fire({
           icon: "success",
@@ -152,9 +160,7 @@ const UserLoginPage = () => {
           color: "#810f05",
           background: "#fdfdfd",
         });
-        
       }
-
     } catch (e) {
       console.log(e.message);
       setErrorMessage({ error: "Email or password is invalid" });
@@ -163,9 +169,9 @@ const UserLoginPage = () => {
     }
   };
 
-  const validateEmail = () => {
+  const validateEmail = (email) => {
     // Regular expression for email validation
-    const emailRegex = String.raw`^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$`;
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     console.log(email);
     return emailRegex.test(email);
   };
@@ -182,9 +188,6 @@ const UserLoginPage = () => {
         <div className="user-login-page-image"></div>
         {!signup ? (
           <div className="user-login-page-form">
-            {/* <div className="user-login-page-logo">
-              <img src={logo} alt="bookup-logo" width="100%" height="100%" />
-            </div> */}
             <h2 className="user-login-page-title">Login</h2>
             <form className="user-login-page-input">
               <div
@@ -261,7 +264,7 @@ const UserLoginPage = () => {
             >
               Sign Up
             </h2>
-            <form className="user-login-page-input" style={{ gap: "20px" }}>
+            <form className="user-login-page-input" style={{ gap: "10px" }}>
               <div
                 style={{
                   color: "var(--accent-color)",
@@ -290,31 +293,29 @@ const UserLoginPage = () => {
                   value={userSignup.fullName}
                 />
               </div>
-              <div className="user-login-page-address-phone">
-                <div>
-                  <TextField
-                    label="Address"
-                    type="text"
-                    required={true}
-                    placeholder="Address"
-                    style={{ fontSize: "16px", padding: "15px" }}
-                    name="address"
-                    onChange={handleSignUpChange}
-                    value={userSignup.address}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    label="Phone"
-                    type="tel"
-                    placeholder="+961 xx xxxxxx"
-                    required={true}
-                    style={{ fontSize: "16px", padding: "15px" }}
-                    name="phoneNumber"
-                    onChange={handleSignUpChange}
-                    value={userSignup.phoneNumber}
-                  />
-                </div>
+              <div className="user-login-page-address">
+                <TextField
+                  label="Address"
+                  type="text"
+                  required={true}
+                  placeholder="Governorate, district, city, building, floor"
+                  style={{ fontSize: "16px", padding: "15px" }}
+                  name="address"
+                  onChange={handleSignUpChange}
+                  value={userSignup.address}
+                />
+              </div>
+              <div className="user-login-page-phone">
+                <TextField
+                  label="Phone"
+                  type="tel"
+                  placeholder="+961 xx xxxxxx"
+                  required={true}
+                  style={{ fontSize: "16px", padding: "15px" }}
+                  name="phoneNumber"
+                  onChange={handleSignUpChange}
+                  value={userSignup.phoneNumber}
+                />
               </div>
               <div>
                 <TextField
@@ -343,7 +344,7 @@ const UserLoginPage = () => {
               <div className="user-login-page-button">
                 <MainButton
                   name="Sign Up"
-                  style={{ padding: "15px 20px" }}
+                  style={{ padding: "10px 20px" }}
                   onClick={(e) => {
                     e.preventDefault();
                     SignUp();

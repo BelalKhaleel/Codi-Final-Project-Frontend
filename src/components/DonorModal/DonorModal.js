@@ -3,6 +3,7 @@ import axios from 'axios';
 import "../DonorModal/DonorModal.css";
 
 const DonorInfoModal = ( donorId ) => {
+// eslint-disable-next-line
 const [userData, setUserData] = useState(donorId);
   const [isModalOpen, setIsModalOpen] = useState(false);
   console.log(donorId);
