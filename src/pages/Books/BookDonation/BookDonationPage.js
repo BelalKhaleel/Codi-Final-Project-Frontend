@@ -39,6 +39,7 @@ const BookDonationPage = () => {
   const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
 
   useEffect(() => {
+    // document.title = "Donate Books"
     const fetchUniversities = async () => {
       try {
         const response = await axios.get(
