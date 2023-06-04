@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "./BookCards.css";
-import DonorInfoModal from "../DonorModal/DonorModal";
 
 export default function Card(props) {
   const [isShowing, setIsShowing] = useState(false);
   const [zIndex, setZIndex] = useState(10);
-  console.log(props, "book");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleClick = () => {
     if (isShowing) {
@@ -19,7 +18,11 @@ export default function Card(props) {
       setZIndex(zIndex + 1);
     }
   };
-  
+
+  const handlePopupToggle = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
   return (
     <>
       <div className={`card${isShowing ? " show" : ""}`} style={{ zIndex }}>
@@ -45,20 +48,32 @@ export default function Card(props) {
           <h2>
             {props.title}
             <small>{props.course}</small>
+            <small>{props.author}</small>
           </h2>
         </div>
         <div className="card-flap flap1">
-          <div className="card-description">
-            {props.description}
-          </div>
+          <div className="card-description">{props.description}</div>
           <div className="card-flap flap2">
             <div className="card-actions">
-            <DonorInfoModal
-                 fullName={props.fullName}
-                 email={props.email}
-                 phoneNumber={props.phoneNumber}
-                 address={props.address}
-              />
+              {!isPopupOpen && ( // Display the "Donor info" button if the popup is not open
+                <button href="#" className="btn" onClick={handlePopupToggle}>
+                  Donor info
+                </button>
+              )}
+              {isPopupOpen && (
+                <div className="donor-popup">
+                  <div className="donor-info">
+                    <h3>Donor Info</h3>
+                    <p>Full Name: {props.fullName}</p>
+                    <p>Email: {props.email}</p>
+                    <p>Phone Number: {props.phoneNumber}</p>
+                    <p>Address: {props.address}</p>
+                  </div>
+                  <button className="btn" onClick={handlePopupToggle}>
+                    Close
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

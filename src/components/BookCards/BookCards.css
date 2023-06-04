@@ -184,3 +184,20 @@ div.card.show div.flap1 {
 div.card.show div.flap2 {
   transition: all 0.3s 0.2s ease-out;
 }
+
+.donor-info {
+  color: var(--color);
+  text-align: start;
+}
+
+.donor-info h3 {
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 701;
+}
+
+.donor-info p {
+  margin-bottom: 5px;
+  font-weight: 501;
+}

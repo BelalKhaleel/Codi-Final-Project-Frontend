@@ -64,7 +64,7 @@ export default function Books() {
     <div className={`cards${isCardsShowing ? " showing" : ""}`}>
       {Data &&
         Data.map((e) => {
-          const { _id, title, course, image, donor } = e;
+          const { _id, title, course, author, image, donor } = e;
           const { fullName, email, phoneNumber, address } = donor;
           console.log(e, "e");
           // Fetch the donor information
@@ -75,6 +75,7 @@ export default function Books() {
               id={_id}
               title={title}
               course={course}
+              author={author}
               image={image}
               fullName={fullName}
               email={email}
