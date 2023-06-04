@@ -1,11 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import {
-  FaEnvelope,
-  FaGithub,
-  FaPhone,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaPhone, FaWhatsapp } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
@@ -167,7 +162,10 @@ const ContactUs = () => {
         <div className="contact-us-page-left-container">
           <div className="why-reach-out-section">
             <h2>Why Reach Out?</h2>
-            <h3>We value your input! <br></br>Please reach out to us for any of the following reasons:</h3>
+            <h3>
+              We value your input! <br></br>Please reach out to us for any of
+              the following reasons:
+            </h3>
             <ul>
               <li>Provide us with your feedback</li>
               <li>Help us improve user experience</li>
@@ -182,27 +180,33 @@ const ContactUs = () => {
             <h2>Get in touch!</h2>
             <div className="get-in-touch-section-icons">
               <span>
-                <a href="mailto:belalkhaleel19@gmail.com"
-                rel="noopener noreferrer"
-                target="_blank">
+                <a
+                  href="mailto:belalkhaleel19@gmail.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <i>
                     <FaEnvelope />
                   </i>
                 </a>
               </span>
               <span>
-                <a href="tel:+96176457539"
-                rel="noopener noreferrer"
-                target="_blank">
+                <a
+                  href="tel:+96176457539"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <i>
                     <FaPhone />
                   </i>
                 </a>
               </span>
               <span>
-                <a href="https://wa.me/96176457539"
-                rel="noopener noreferrer"
-                target="_blank">
+                <a
+                  href="https://wa.me/96176457539"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <i>
                     <FaWhatsapp />
                   </i>

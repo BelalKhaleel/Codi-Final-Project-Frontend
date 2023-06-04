@@ -83,7 +83,7 @@ const UserLoginPage = () => {
     setErrorMessage({ error: "" });
     setIsLoading(true);
     try {
-      await axios.post(
+     const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/user/register`,
         signUp
       );
@@ -96,6 +96,10 @@ const UserLoginPage = () => {
         password: "",
       });
       setSignup(false);
+      //Automatically sign up user
+      const token = response.data["user-token"];
+      cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
+      setLoggedIn(true);
       Swal.fire({
         icon: "success",
         title: "Registration Successful",
@@ -106,18 +110,7 @@ const UserLoginPage = () => {
         showConfirmButton: false,
         color: "#fdfdfd",
         background: "#810f05",
-      });
-          // Automatically sign in the user
-    const login = {
-      email: userSignup.email,
-      password: userSignup.password,
-    };
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/login`, login);
-    if (response.status === 200) {
-      const token = response.data["user-token"];
-      cookie.save("user-token", token, { maxAge: 5 * 60 * 60 * 1000 }); // Set the "user-token" cookie
-      setLoggedIn(true);
-    }
+      });     
     } catch (e) {
       console.log(e);
       setErrorMessage({ error: e.response.data.message });

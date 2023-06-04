@@ -48,7 +48,7 @@ const [userData, setUserData] = useState(donorId);
                 <span>Full Name: {userData.fullName}</span>
                 <span>Email: {userData.email}</span>
                 <span>Phone Number: {userData.phoneNumber}</span>
-                <span>Address: {userData.address.governorate}, {userData.address.district}, {userData.address.city}</span>
+                <span>Address: {userData.address}</span>
               </>
             ) : (
               <span>Loading user data...</span>

@@ -52,7 +52,6 @@ function App() {
         if (response.status === 200) {
           setLoggedIn(true);
           if (cookie.load("user-token").isAdmin) {
-            console.log("hooooooooooooooooo")
             setAdmin(true);
             setIsLoading(false);
           } else {
@@ -82,7 +81,7 @@ function App() {
       <isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
         <isAdmin.Provider value={[admin, setAdmin]}>
           <div className="App">
-            {shouldRenderHeader && <Header />}
+            {shouldRenderHeader && <Header /> }
             {isLoading ? (
               <div
                 style={{
