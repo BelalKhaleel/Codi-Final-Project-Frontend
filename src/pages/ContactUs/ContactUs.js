@@ -1,11 +1,19 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import emailjs from "@emailjs/browser";
 import { FaEnvelope, FaGithub, FaPhone, FaWhatsapp } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
+import { headerStatus } from "../../App";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 const ContactUs = () => {
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+  // eslint-disable-next-line
+  const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
+
   const form = useRef();
   const [err, setErr] = useState("");
   const [data, setData] = useState({
@@ -104,6 +112,29 @@ const ContactUs = () => {
 
   return (
     <div className="contact-us-page-container">
+      {isTablet && (
+        <button
+          onClick={() => {
+            setHeaderExpanded((prev) => !prev);
+          }}
+          style={{
+            display: isTablet ? "block" : "none",
+          }}
+        >
+          <MenuIcon
+            sx={{
+              display: isTablet ? "block" : "none",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              color: "var(--color)",
+              margin: "20px",
+              fontSize: "30px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
+      )}
       <h1 className="contact-us-page-title">Don't hesitate to contact us!</h1>
       <div className="contact-us-container">
         <div className="contact-us-form-container">

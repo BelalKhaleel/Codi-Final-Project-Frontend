@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./BookSearchPage.css";
 import { Pagination } from "antd";
 import Card from "../../../components/BookCards/BookCards";
+import { headerStatus } from "../../../App";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 export default function Books() {
   const [isCardsShowing, setIsCardsShowing] = useState(false);
   // eslint-disable-next-line
   const [Loading, setLoading] = useState(true);
   const [Data, setData] = useState([]);
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+  // eslint-disable-next-line
+  const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +31,6 @@ export default function Books() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/book`)
       .then((response) => {
-        // console.log(response);
         setData(response.data.items);
         setLoading(false);
       })
@@ -36,7 +42,10 @@ export default function Books() {
 
   const fetchDonorInfo = async (donorId) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/donor/${donorId}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/user/donor/${donorId}`
+      );
+      // eslint-disable-next-line
       const donorInfo = response.data;
       console.log(response);
       // Process the donorInfo data
@@ -59,7 +68,7 @@ export default function Books() {
           const { fullName, email, phoneNumber, address } = donor;
           console.log(e, "e");
           // Fetch the donor information
-        fetchDonorInfo(donor._id)
+          fetchDonorInfo(donor._id);
           return (
             <Card
               key={_id}
@@ -75,6 +84,29 @@ export default function Books() {
             />
           );
         })}
+      {isTablet && (
+        <button
+          onClick={() => {
+            setHeaderExpanded((prev) => !prev);
+          }}
+          style={{
+            display: isTablet ? "block" : "none",
+          }}
+        >
+          <MenuIcon
+            sx={{
+              display: isTablet ? "block" : "none",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              margin: "20px",
+              color: "var(--color)",
+              fontSize: "30px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
+      )}
       <Pagination defaultCurrent={1} total={50} />
     </div>
   );

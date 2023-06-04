@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./BookDonationPage.css";
 import { Collapse } from "antd";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
-// import jwt from 'jsonwebtoken';
+import { headerStatus } from "../../../App";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 const { Panel } = Collapse;
 
@@ -21,8 +23,6 @@ const text4 =
   "Once the donation process has been successfully completed, go to your profile page and mark the donated book as no longer available. This will inform other users that the book has been donated and is no longer up for donation.";
 
 const BookDonationPage = () => {
-  // const [contactName, setContactName] = useState("");
-  // const [email, setEmail] = useState("");
   const [bookTitle, setBookTitle] = useState("");
   const [course, setCourse] = useState("");
   const [author, setAuthor] = useState("");
@@ -33,6 +33,10 @@ const BookDonationPage = () => {
   const [status, setStatus] = useState("");
   const [image, setImage] = useState(null);
   const [cookies] = useCookies();
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+  // eslint-disable-next-line
+  const [headerExpanded, setHeaderExpanded] = useContext(headerStatus);
 
   useEffect(() => {
     const fetchUniversities = async () => {
@@ -110,9 +114,29 @@ const BookDonationPage = () => {
       <div className="donation-page-title">
         <h1>Books for a Brighter Future: Donate Today!</h1>
       </div>
-      {/* <div className="donation-page-main-hero-section">
-        <img src={hero-image} alt="book-donation"/>
-      </div> */}
+      {isTablet && (
+        <button
+          onClick={() => {
+            setHeaderExpanded((prev) => !prev);
+          }}
+          style={{
+            display: isTablet ? "block" : "none",
+          }}
+        >
+          <MenuIcon
+            sx={{
+              display: isTablet ? "block" : "none",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              color: "var(--color)",
+              margin: "20px",
+              fontSize: "30px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
+      )}
       <div className="donation-page-container">
         <div className="donation-page-form-container">
           <form className="book-donation-page-form" onSubmit={handleSubmit}>

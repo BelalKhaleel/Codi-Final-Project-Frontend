@@ -40,8 +40,6 @@ function HomePage() {
               position: "absolute",
               top: 0,
               right: 0,
-              // color: "var(--color2)",
-              backgroundColor : "var(--secondary-color)",
               margin: "20px",
               color: "white",
               fontSize: "30px",
