@@ -30,8 +30,11 @@ button.btn:hover {
 
 div.cards {
   margin: 80px auto;
-  max-width: 960px;
+  max-width: 970px;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 div.card {
@@ -45,12 +48,18 @@ div.card {
   transition: all 0.3s 0s ease-in;
   width: 300px;
   z-index: 1;
-  box-shadow: 5px 10px 18px #888888;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+.cardimage-holder {
+  width: 300px;
+  height: 400px;
 }
 
 div.card img {
-  max-width: 300px;
-  max-height: 300px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 div.card .card__image-holder {
@@ -64,6 +73,13 @@ div.card div.card-title {
   padding: 6px 15px 10px;
   position: relative;
   z-index: 0;
+}
+
+.author {
+  font-size: 1rem;
+  color: grey;
+  text-align: right;
+  margin-top: 1rem;
 }
 
 div.card div.card-title button.toggle-info {
@@ -105,11 +121,16 @@ div.card div.card-title h2 {
   letter-spacing: -0.05em;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  column-gap: 1rem;
+  row-gap: 5px;
+  margin-top: 10px;
 }
 
 div.card div.card-title h2 small {
   display: block;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.025em;
 }
@@ -194,7 +215,7 @@ div.card.show div.flap2 {
 }
 
 .donor-info h3 {
-  color: var(--accent-color);
+  color: #00a2ad;
   text-align: center;
   margin-bottom: 10px;
   font-weight: 701;

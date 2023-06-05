@@ -47,8 +47,8 @@ export default function Card(props) {
           </button>
           <h2>
             {props.title}
-            <small>{props.course}</small>
-            <small>{props.author}</small>
+            <small className="course">{props.course}</small>
+            <small className="author">{props.author}</small>
           </h2>
         </div>
         <div className="card-flap flap1">

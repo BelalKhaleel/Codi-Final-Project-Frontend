@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./BookSearchPage.css";
-import { Pagination } from "antd";
+import { Pagination, Input } from "antd";
 import Card from "../../../components/BookCards/BookCards";
 import { headerStatus } from "../../../App";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,6 +13,7 @@ export default function Books() {
   // eslint-disable-next-line
   const [data, setdata] = useState([]);
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [isCardsShowing, setIsCardsShowing] = useState(false);
   // eslint-disable-next-line
@@ -30,10 +31,13 @@ export default function Books() {
         setLoading(true);
         const page = currentPage;
         const limit = itemsPerPage;
-  
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/book`, {
-          params: { page, limit },
-        });
+
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/book`,
+          {
+            params: { page, limit, query: searchQuery },
+          }
+        );
         setData(response.data.items);
         setTotalPages(response.data.totalPages);
         setLoading(false);
@@ -81,7 +85,7 @@ export default function Books() {
       });
       setDonorInfo(donorInfoMap);
     };
-  
+
     fetchDonorInfoForData();
   }, [data]);
 
@@ -89,62 +93,75 @@ export default function Books() {
     setCurrentPage(page);
   };
 
-  return (
-    <div className={`cards${isCardsShowing ? " showing" : ""}`}>
-      {Data &&
-        Data.map((e) => {
-          const { _id, title, course, author, description, image, donor } = e;
-          const { fullName, email, phoneNumber, address } = donor;
-          console.log(e, "e");
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
-          return (
-            <Card
-              key={_id}
-              id={_id}
-              title={title}
-              course={course}
-              author={author}
-              description={description}
-              image={image}
-              fullName={fullName}
-              email={email}
-              phoneNumber={phoneNumber}
-              address={address}
-              donorInfo={donorInfo}
-              handleCardsClick={handleCardsClick}
-            />
-          );
-        })}
-      {isTablet && (
-        <button
-          onClick={() => {
-            setHeaderExpanded((prev) => !prev);
-          }}
-          style={{
-            display: isTablet ? "block" : "none",
-          }}
-        >
-          <MenuIcon
-            sx={{
-              display: isTablet ? "block" : "none",
-              position: "absolute",
-              top: 0,
-              right: 0,
-              margin: "20px",
-              color: "var(--color)",
-              fontSize: "30px",
-              cursor: "pointer",
-            }}
-          />
-        </button>
-      )}
-      <Pagination
-        className="pagination"
-        current={currentPage}
-        total={totalPages * itemsPerPage}
-        pageSize={itemsPerPage}
-        onChange={handlePageChange}
+  return (
+    <div>
+      <Input.Search
+        placeholder="Search Books ..."
+        enterButton="Search"
+        size="large"
+        loading={Loading}
+        onSearch={handleSearch}
       />
+      <div className={`cards${isCardsShowing ? " showing" : ""}`}>
+        {Data &&
+          Data.map((e) => {
+            const { _id, title, course, author, description, image, donor } = e;
+            const { fullName, email, phoneNumber, address } = donor;
+            console.log(e, "e");
+
+            return (
+              <Card
+                key={_id}
+                id={_id}
+                title={title}
+                course={course}
+                author={author}
+                description={description}
+                image={image}
+                fullName={fullName}
+                email={email}
+                phoneNumber={phoneNumber}
+                address={address}
+                donorInfo={donorInfo}
+                handleCardsClick={handleCardsClick}
+              />
+            );
+          })}
+        {isTablet && (
+          <button
+            onClick={() => {
+              setHeaderExpanded((prev) => !prev);
+            }}
+            style={{
+              display: isTablet ? "block" : "none",
+            }}
+          >
+            <MenuIcon
+              sx={{
+                display: isTablet ? "block" : "none",
+                position: "absolute",
+                top: 0,
+                right: 0,
+                margin: "20px",
+                color: "var(--color)",
+                fontSize: "30px",
+                cursor: "pointer",
+              }}
+            />
+          </button>
+        )}
+      </div>
+        <Pagination
+          className="search-page-pagination"
+          current={currentPage}
+          total={totalPages * itemsPerPage}
+          pageSize={itemsPerPage}
+          onChange={handlePageChange}
+        />
     </div>
   );
 }
