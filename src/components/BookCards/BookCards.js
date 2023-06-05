@@ -4,14 +4,14 @@ import "./BookCards.css";
 
 export default function Card(props) {
   const [isShowing, setIsShowing] = useState(false);
-  const [zIndex, setZIndex] = useState(10);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [zIndex, setZIndex] = useState(2);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
     if (isShowing) {
       setIsShowing(false);
-      if (zIndex > 10) {
-        setZIndex(10);
+      if (zIndex > 1) {
+        setZIndex(1);
       }
     } else {
       setIsShowing(true);
@@ -19,8 +19,8 @@ export default function Card(props) {
     }
   };
 
-  const handlePopupToggle = () => {
-    setIsPopupOpen(!isPopupOpen);
+  const handleHover = (value) => {
+    setIsHovered(value);
   };
 
   return (
@@ -34,17 +34,26 @@ export default function Card(props) {
           />
         </div>
         <div className="card-title">
-          <button
-            href="#"
-            className="toggle-info btn"
-            onClick={() => {
-              handleClick();
-              props.handleCardsClick();
-            }}
+          <div
+            className={`toggle-info-container${isHovered ? " hovered" : ""}`}
+            onMouseEnter={() => handleHover(true)}
+            onMouseLeave={() => handleHover(false)}
           >
-            <span className="left"></span>
-            <span className="right"></span>
-          </button>
+            <button
+              href="#"
+              className="toggle-info btn"
+              onClick={() => {
+                handleClick();
+                props.handleCardsClick();
+              }}
+            >
+              <span className="left"></span>
+              <span className="right"></span>
+            </button>
+            <div className="hidden-content">
+              <span>Donor Info</span>
+            </div>
+          </div>
           <h2>
             {props.title}
             <small className="course">{props.course}</small>
@@ -55,13 +64,6 @@ export default function Card(props) {
           <div className="card-description">{props.description}</div>
           <div className="card-flap flap2">
             <div className="card-actions">
-              {!isPopupOpen && ( // Display the "Donor info" button if the popup is not open
-                <button href="#" className="btn" onClick={handlePopupToggle}>
-                  Donor info
-                </button>
-              )}
-              {isPopupOpen && (
-                <div className="donor-popup">
                   <div className="donor-info">
                     <h3>Donor Info</h3>
                     <p>Full Name: {props.fullName}</p>
@@ -69,11 +71,6 @@ export default function Card(props) {
                     <p>Phone Number: {props.phoneNumber}</p>
                     <p>Address: {props.address}</p>
                   </div>
-                  <button className="btn" onClick={handlePopupToggle}>
-                    Close
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>

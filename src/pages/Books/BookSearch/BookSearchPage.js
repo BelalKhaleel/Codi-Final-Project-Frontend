@@ -47,7 +47,7 @@ export default function Books() {
       }
     };
     fetchData();
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, searchQuery]);
 
   const handleCardsClick = () => {
     setIsCardsShowing(!isCardsShowing);

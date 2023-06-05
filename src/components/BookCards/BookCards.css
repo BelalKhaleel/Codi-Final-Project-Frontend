@@ -225,3 +225,32 @@ div.card.show div.flap2 {
   margin-bottom: 5px;
   font-weight: 501;
 }
+
+.toggle-info-container {
+  position: relative;
+}
+
+.hidden-content {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: -4px;
+  width: 71px;
+  border-radius: 7px;
+  text-align: center;
+  padding: 4px;
+  background-color: #423633;
+  opacity: 0.6;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: 0.2s;
+  transition-delay: 0.1s;
+}
+
+.hidden-content span {
+  font-size: 12px;
+  color: white;
+}
+
+.toggle-info-container.hovered .hidden-content {
+  display: block;
+}
